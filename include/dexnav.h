@@ -65,6 +65,7 @@
 #define DEXNAV_MASK_ENVIRONMENT     0xC000  //last two bit
 
 //funcs
+void DexNavGuiInit(MainCallback callback);
 void EndDexNavSearch(u8 taskId);
 void Task_OpenDexNavFromStartMenu(u8 taskId);
 bool8 TryStartDexnavSearch(void);
