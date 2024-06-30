@@ -361,6 +361,7 @@ SECTIONS {
         src/pokemon_sprite_visualizer.o(.text);
         src/expansion_intro.o(.text);
         src/dexnav.o(.text);
+        src/ui_startmenu_full.o(.text);
         src/ui_main_menu.o(.text);
         src/new_shop.o(.text);
     } > ROM =0
@@ -732,6 +733,7 @@ SECTIONS {
         src/pokemon_sprite_visualizer.o(.rodata);
         src/expansion_intro.o(.rodata);
         src/dexnav.o(.rodata);
+        src/ui_startmenu_full.o(.rodata);
         src/ui_main_menu.o(.rodata);
         src/new_shop.o(.rodata);
     } > ROM =0
