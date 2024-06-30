@@ -172,6 +172,7 @@ static const struct WindowTemplate sStartMenuWindowTemplates[] =
         .paletteNum = 0,   // palette index to use for text
         .baseBlock = 1 + (9 * 15) + (30 * 2),     // tile start in VRAM
     },
+    DUMMY_WIN_TEMPLATE
 };
 
 
@@ -553,7 +554,7 @@ static void CursorCallback(struct Sprite *sprite) // Sprite callback for the cur
     sprite->x = spriteCords[sStartMenuDataPtr->selector_y][sStartMenuDataPtr->selector_x].x;
     sprite->y = spriteCords[sStartMenuDataPtr->selector_y][sStartMenuDataPtr->selector_x].y;
 
-    DebugPrintf("%d", sStartMenuDataPtr->selectedStat);
+
 }
 
 static void InitCursorInPlace()
@@ -655,7 +656,7 @@ static void CreatePartyMonIcons()
 #ifdef POKEMON_EXPANSION
             sStartMenuDataPtr->iconMonSpriteIds[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG), SpriteCB_MonIcon, x, y, 0, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
 #else
-            sStartMenuDataPtr->iconMonSpriteIds[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG), SpriteCB_MonIcon, x, y, 0, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY), FALSE);
+            sStartMenuDataPtr->iconMonSpriteIds[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG), SpriteCB_MonIcon, x, y, 0, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY), TRUE);
 #endif
 
         gSprites[sStartMenuDataPtr->iconMonSpriteIds[i]].oam.priority = 0;
