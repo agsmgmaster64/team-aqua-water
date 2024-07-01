@@ -1,6 +1,7 @@
 #ifndef GUARD_DEXNAV_H
 #define GUARD_DEXNAV_H
 
+#include "main.h"
 #include "config/dexnav.h"
 
 // GUI Info

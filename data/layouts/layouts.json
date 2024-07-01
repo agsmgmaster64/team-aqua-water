@@ -5328,6 +5328,18 @@
       "secondary_tileset": "gTileset_RG_SilphCo",
       "border_filepath": "data/layouts/MauvilleCity_GameCornerBasement/border.bin",
       "blockdata_filepath": "data/layouts/MauvilleCity_GameCornerBasement/map.bin"
+    },
+    {
+      "id": "LAYOUT_BASINVILLE",
+      "name": "Basinville_Layout",
+      "width": 40,
+      "height": 40,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_RG_General",
+      "secondary_tileset": "gTileset_RG_Cave",
+      "border_filepath": "data/layouts/Basinville/border.bin",
+      "blockdata_filepath": "data/layouts/Basinville/map.bin"
     }
   ]
 }
