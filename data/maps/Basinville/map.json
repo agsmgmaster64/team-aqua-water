@@ -18,7 +18,62 @@
 
   ],
   "warp_events": [
-
+    {
+      "x": 8,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_BASINVILLE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 19,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_BASINVILLE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 31,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_BASINVILLE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 5,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_BASINVILLE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 19,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_BASINVILLE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 31,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_BASINVILLE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 19,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_BASINVILLE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 18,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_BASINVILLE",
+      "dest_warp_id": "0"
+    }
   ],
   "coord_events": [
 
