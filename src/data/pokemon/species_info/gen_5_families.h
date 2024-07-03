@@ -632,7 +632,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #endif //P_FAMILY_LILLIPUP
 
 #if P_FAMILY_PURRLOIN
-    [SPECIES_PURRLOIN] =
+    [SPECIES_BASINEY] =
     {
         .baseHP        = 41,
         .baseAttack    = 50,

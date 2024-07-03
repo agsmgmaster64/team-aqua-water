@@ -510,7 +510,7 @@
 #define SPECIES_LAST_WORD_LETTY                         506 // LLetty
 #define SPECIES_LAST_WORD_KANAKO                        507
 #define SPECIES_STOUTLAND                               508 // Ayakashi
-#define SPECIES_PURRLOIN                                509
+#define SPECIES_BASINEY                                509
 #define SPECIES_LIEPARD                                 510
 #define SPECIES_PANSAGE                                 511
 #define SPECIES_SIMISAGE                                512

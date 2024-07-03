@@ -1086,3 +1086,6 @@ EventScript_VsSeekerChargingDone::
 
 	.include "data/maps/Yogyakarta/scripts.inc"
 	.include "data/maps/Yogyakarta/text.inc"
+
+	.include "data/maps/Basinville_StartingHouse/scripts.inc"
+	.include "data/maps/Basinville_StartingHouse/text.inc"

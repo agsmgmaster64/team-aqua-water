@@ -5332,7 +5332,7 @@
     {
       "id": "LAYOUT_BASINVILLE",
       "name": "Basinville_Layout",
-      "width": 40,
+      "width": 42,
       "height": 40,
       "border_width": 2,
       "border_height": 2,
@@ -5340,6 +5340,18 @@
       "secondary_tileset": "gTileset_RG_SeviiIslands123",
       "border_filepath": "data/layouts/Basinville/border.bin",
       "blockdata_filepath": "data/layouts/Basinville/map.bin"
+    },
+    {
+      "id": "LAYOUT_BASINVILLE_STARTING_HOUSE",
+      "name": "Basinville_StartingHouse_Layout",
+      "width": 11,
+      "height": 10,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_RG_Building",
+      "secondary_tileset": "gTileset_RG_PewterGym",
+      "border_filepath": "data/layouts/Basinville_StartingHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Basinville_StartingHouse/map.bin"
     }
   ]
 }
