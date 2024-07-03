@@ -2540,6 +2540,22 @@ bool8 ScrCmd_casinopokemart(struct ScriptContext *ctx)
     return TRUE;
 }
 
+bool8 ScrCmd_buyonlymart(struct ScriptContext *ctx)
+{
+    const void *ptr = (void *)ScriptReadWord(ctx);
+
+    NewShop_CreateBuyOnlyMartMenu(ptr);
+    ScriptContext_Stop();
+    return TRUE;
+}
+
+bool8 ScrCmd_itemseller(struct ScriptContext *ctx)
+{
+    NewShop_CreateSellOnlyMartMenu();
+    ScriptContext_Stop();
+    return TRUE;
+}
+
 bool8 ScrCmd_setspeakername(struct ScriptContext *ctx)
 {
     const u8 *name = (const u8 *)ScriptReadWord(ctx);

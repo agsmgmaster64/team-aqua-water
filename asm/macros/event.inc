@@ -1965,6 +1965,15 @@
 	.4byte \text
 	.endm
 
+	.macro buyonlymart pointer:req
+	.byte 0xe9
+	.4byte \pointer
+	.endm
+
+	.macro itemseller
+	.byte 0xea
+	.endm
+
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req

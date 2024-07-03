@@ -1,5 +1,11 @@
 mapscripts Basinville_StartingHouse_MapScripts {}
 
+const MULTI_HEAL_PARTY = 0
+const MULTI_WATER_SHOP = 1
+const MULTI_SELL_ITEMS = 2
+const MULTI_TANGENT = 3
+const MULTI_NOTHING = 4
+
 script Basinville_StartingHouse_Shiori {
     lock
     if (!flag(FLAG_SYS_POKEMON_GET)) {
@@ -8,21 +14,48 @@ script Basinville_StartingHouse_Shiori {
         end
     }
     setspeakername(Basinville_StartingHouse_Text_ShioriName)
-    msgbox(Basinville_StartingHouse_Text_ShioriRegular, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(Basinville_StartingHouse_Shiori_WaterShop)
+    message(Basinville_StartingHouse_Text_ShioriRegular)
+    waitmessage
+    while {
+        call(Basinville_StartingHouse_Shiori_PrepareMultichoice)
+        if (var(VAR_RESULT) > MULTI_TANGENT) {
+            break
+        }
+        switch (var(VAR_RESULT)) {
+            case MULTI_HEAL_PARTY:
+                call(Basinville_StartingHouse_Shiori_HealParty)
+            case MULTI_WATER_SHOP:
+                call(Basinville_StartingHouse_Shiori_WaterShop)
+            case MULTI_SELL_ITEMS:
+                call(Basinville_StartingHouse_Shiori_SellItems)
+            case MULTI_TANGENT:
+                call(Basinville_StartingHouse_Shiori_Tangent)
+        }
+        message(Basinville_StartingHouse_Text_ShioriRegularAgain)
+        waitmessage
     }
+    msgbox(Basinville_StartingHouse_Text_ShioriRegular2)
     hidespeakername
     release
     end
+}
+
+script Basinville_StartingHouse_Shiori_PrepareMultichoice {
+    dynmultipush(Basinville_StartingHouse_Text_HealParty, MULTI_HEAL_PARTY)
+    dynmultipush(Basinville_StartingHouse_Text_WaterShop, MULTI_WATER_SHOP)
+    dynmultipush(Basinville_StartingHouse_Text_SellItems, MULTI_SELL_ITEMS)
+    dynmultipush(Basinville_StartingHouse_Text_Tangent, MULTI_TANGENT)
+    dynmultipush(Basinville_StartingHouse_Text_Nothing, MULTI_NOTHING)
+    dynmultistack(0, 0, FALSE, 5, FALSE, MULTI_HEAL_PARTY, NULL)
+    return
 }
 
 script Basinville_StartingHouse_Shiori_StartingOut {
     setspeakername(Basinville_StartingHouse_Text_ShioriName)
     msgbox(Basinville_StartingHouse_Text_ShioriSpeechStart)
     hidespeakername
-    setflag(FLAG_RECEIVED_RUNNING_SHOES)
-    givemon(SPECIES_CHIBI_STAR, 10, ITEM_GEYSER_WATER, ITEM_TOHO_ORB)
+    setflag(FLAG_SYS_B_DASH)
+    givemon(SPECIES_CHIBI_STAR, 10, ITEM_GEYSER_WATER)
     setflag(FLAG_SYS_POKEMON_GET)
     setflag(FLAG_SYS_POKEDEX_GET)
     setspeakername(Basinville_StartingHouse_Text_ShioriName)
@@ -31,13 +64,35 @@ script Basinville_StartingHouse_Shiori_StartingOut {
     return
 }
 
+script Basinville_StartingHouse_Shiori_HealParty {
+    msgbox(Basinville_StartingHouse_Text_ShioriHeal)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    special(HealPlayerParty)
+    callnative(UpdateFollowingPokemon)
+    fadescreen(FADE_FROM_BLACK)
+    setspeakername(Basinville_StartingHouse_Text_ShioriName)
+    msgbox(Basinville_StartingHouse_Text_ShioriHeal2)
+    return
+}
+
 script Basinville_StartingHouse_Shiori_WaterShop {
-    message(Basinville_StartingHouse_Text_ShioriShop)
-    waitmessage
-    pokemart(Basinville_StartingHouse_Shiori_WaterShopItems)
-    hidespeakername
-    release
-    end
+    msgbox(Basinville_StartingHouse_Text_ShioriShop)
+    buyonlymart(Basinville_StartingHouse_Shiori_WaterShopItems)
+    return
+}
+
+script Basinville_StartingHouse_Shiori_SellItems {
+    msgbox(Basinville_StartingHouse_Text_ShioriSell)
+    itemseller
+    return
+}
+
+script Basinville_StartingHouse_Shiori_Tangent {
+    msgbox(Basinville_StartingHouse_Text_ShioriTangent)
+    return
 }
 
 mart Basinville_StartingHouse_Shiori_WaterShopItems {
@@ -46,6 +101,26 @@ mart Basinville_StartingHouse_Shiori_WaterShopItems {
 
 text Basinville_StartingHouse_Text_ShioriName {
     "Shiori"
+}
+
+text Basinville_StartingHouse_Text_HealParty {
+    "Heal Party"
+}
+
+text Basinville_StartingHouse_Text_WaterShop {
+    "Water Shop"
+}
+
+text Basinville_StartingHouse_Text_SellItems {
+    "Sell Items"
+}
+
+text Basinville_StartingHouse_Text_Tangent {
+    "Tangent"
+}
+
+text Basinville_StartingHouse_Text_Nothing {
+    "Nothing"
 }
 
 text Basinville_StartingHouse_Text_ShioriSpeechStart {
@@ -71,13 +146,33 @@ text Basinville_StartingHouse_Text_ShioriSpeechStart2 {
 }
 
 text Basinville_StartingHouse_Text_ShioriRegular {
-    format("Shiorin. ")
+    format("Heya, anything you want me to do right now?")
+}
+
+text Basinville_StartingHouse_Text_ShioriRegularAgain {
+    format("Alright, anything else you want me to do right now?")
 }
 
 text Basinville_StartingHouse_Text_ShioriRegular2 {
     format("Have a nice day in the village then.")
 }
 
+text Basinville_StartingHouse_Text_ShioriHeal {
+    format("Sure, let me just help your party out then.")
+}
+
+text Basinville_StartingHouse_Text_ShioriHeal2 {
+    format("There, your Puppets should be all better now.")
+}
+
 text Basinville_StartingHouse_Text_ShioriShop {
     format("Well, my waters are here if you wanna buy any.")
+}
+
+text Basinville_StartingHouse_Text_ShioriSell {
+    format("Alright, let me see what you have to offer then.")
+}
+
+text Basinville_StartingHouse_Text_ShioriTangent {
+    format("Yap yap yap.")
 }

@@ -79,9 +79,11 @@ enum {
 enum {
     MART_TYPE_NORMAL,
     MART_TYPE_VARIABLE,
+    MART_TYPE_BUY_ONLY,
     MART_TYPE_CASINO,
     MART_TYPE_DECOR,
     MART_TYPE_DECOR2,
+    MART_TYPE_SELL_ONLY,
     #ifdef MUDSKIP_OUTFIT_SYSTEM
     MART_TYPE_OUTFIT,
     #endif // MUDSKIP_OUTFIT_SYSTEM
@@ -93,6 +95,9 @@ enum
     SELLER_NONE,
     SELLER_JERRY, // OBJ_EVENT_GFX_MART_EMPLOYEE
     SELLER_JENNIE, // OBJ_EVENT_GFX_WOMAN_3
+    SELLER_SHIORI,
+    SELLER_STUPID_RAT,
+    SELLER_BOB_OMB,
     SELLER_COUNT,
 };
 
@@ -180,6 +185,18 @@ const u32 sNewShopMenu_SellerScrollPal_Jennie[] = INCBIN_U32("graphics/new_shop/
 const u32 sNewShopMenu_SellerScrollMap_Jennie[] = INCBIN_U32("graphics/new_shop/sellers/jennie/scroll.bin.lz");
 const u16 sNewShopMenu_SellerCursorGfx_Jennie[] = INCBIN_U16("graphics/new_shop/sellers/jennie/cursor.4bpp");
 const u32 sNewShopMenu_SellerCursorPal_Jennie[] = INCBIN_U32("graphics/new_shop/sellers/jennie/cursor.gbapal.lz");
+
+const u8 sNewShopMenu_SellerMugshotGfx_Shiori[] = INCBIN_U8("graphics/new_shop/sellers/shiori/mugshot.4bpp");
+const u16 sNewShopMenu_SellerMugshotPal_Shiori[] = INCBIN_U16("graphics/new_shop/sellers/shiori/mugshot.gbapal");
+const u32 sNewShopMenu_SellerMenuGfx_Shiori[] = INCBIN_U32("graphics/new_shop/sellers/shiori/menu.4bpp.lz");
+const u32 sNewShopMenu_SellerMenuCoinGfx_Shiori[] = INCBIN_U32("graphics/new_shop/sellers/shiori/menu_coin.4bpp.lz");
+const u32 sNewShopMenu_SellerMenuPal_Shiori[] = INCBIN_U32("graphics/new_shop/sellers/shiori/menu.gbapal.lz");
+const u32 sNewShopMenu_SellerMenuMap_Shiori[] = INCBIN_U32("graphics/new_shop/sellers/shiori/menu.bin.lz");
+const u32 sNewShopMenu_SellerScrollGfx_Shiori[] = INCBIN_U32("graphics/new_shop/sellers/shiori/scroll.4bpp.lz");
+const u32 sNewShopMenu_SellerScrollPal_Shiori[] = INCBIN_U32("graphics/new_shop/sellers/shiori/scroll.gbapal.lz");
+const u32 sNewShopMenu_SellerScrollMap_Shiori[] = INCBIN_U32("graphics/new_shop/sellers/shiori/scroll.bin.lz");
+const u16 sNewShopMenu_SellerCursorGfx_Shiori[] = INCBIN_U16("graphics/new_shop/sellers/shiori/cursor.4bpp");
+const u32 sNewShopMenu_SellerCursorPal_Shiori[] = INCBIN_U32("graphics/new_shop/sellers/shiori/cursor.gbapal.lz");
 
 static void Task_ShopMenu(u8 taskId);
 static void Task_HandleShopMenuQuit(u8 taskId);
@@ -694,6 +711,48 @@ static const struct Seller sSellers[] = {
         .cursorGfx = sNewShopMenu_SellerCursorGfx_Jennie,
         .cursorPal = sNewShopMenu_SellerCursorPal_Jennie,
     },
+    [SELLER_SHIORI] = {
+        { .gfxId = OBJ_EVENT_GFX_WOMAN_3 },
+        .mugshotGfx = sNewShopMenu_SellerMugshotGfx_Shiori,
+        .mugshotPal = sNewShopMenu_SellerMugshotPal_Shiori,
+        .menuGfx = sNewShopMenu_SellerMenuGfx_Shiori,
+        .menuCoinGfx = sNewShopMenu_SellerMenuGfx_Shiori,
+        .menuPal = sNewShopMenu_SellerMenuPal_Shiori,
+        .menuMap = sNewShopMenu_SellerMenuMap_Shiori,
+        .scrollGfx = sNewShopMenu_SellerScrollGfx_Shiori,
+        .scrollPal = sNewShopMenu_SellerScrollPal_Shiori,
+        .scrollMap = sNewShopMenu_SellerScrollMap_Shiori,
+        .cursorGfx = sNewShopMenu_SellerCursorGfx_Shiori,
+        .cursorPal = sNewShopMenu_SellerCursorPal_Shiori,
+    },
+    [SELLER_STUPID_RAT] = {
+        { .gfxId = OBJ_EVENT_GFX_MART_EMPLOYEE },
+        .mugshotGfx = sNewShopMenu_SellerMugshotGfx_Jerry,
+        .mugshotPal = sNewShopMenu_SellerMugshotPal_Jerry,
+        .menuGfx = sNewShopMenu_SellerMenuGfx_Jerry,
+        .menuCoinGfx = sNewShopMenu_SellerMenuGfx_Jerry,
+        .menuPal = sNewShopMenu_SellerMenuPal_Jerry,
+        .menuMap = sNewShopMenu_SellerMenuMap_Jerry,
+        .scrollGfx = sNewShopMenu_SellerScrollGfx_Jerry,
+        .scrollPal = sNewShopMenu_SellerScrollPal_Jerry,
+        .scrollMap = sNewShopMenu_SellerScrollMap_Jerry,
+        .cursorGfx = sNewShopMenu_SellerCursorGfx_Jerry,
+        .cursorPal = sNewShopMenu_SellerCursorPal_Jerry,
+    },
+    [SELLER_BOB_OMB] = {
+        { .gfxId = OBJ_EVENT_GFX_MART_EMPLOYEE },
+        .mugshotGfx = sNewShopMenu_SellerMugshotGfx_Jerry,
+        .mugshotPal = sNewShopMenu_SellerMugshotPal_Jerry,
+        .menuGfx = sNewShopMenu_SellerMenuGfx_Jerry,
+        .menuCoinGfx = sNewShopMenu_SellerMenuGfx_Jerry,
+        .menuPal = sNewShopMenu_SellerMenuPal_Jerry,
+        .menuMap = sNewShopMenu_SellerMenuMap_Jerry,
+        .scrollGfx = sNewShopMenu_SellerScrollGfx_Jerry,
+        .scrollPal = sNewShopMenu_SellerScrollPal_Jerry,
+        .scrollMap = sNewShopMenu_SellerScrollMap_Jerry,
+        .cursorGfx = sNewShopMenu_SellerCursorGfx_Jerry,
+        .cursorPal = sNewShopMenu_SellerCursorPal_Jerry,
+    },
 };
 
 const u8 sText_ThatItemIsSoldOut[] = _("I'm sorry, but\nthat item is\nsold out.{PAUSE_UNTIL_PRESS}");
@@ -897,8 +956,15 @@ static void Task_HandleShopMenuSell(u8 taskId)
 
 void CB2_ExitSellNewShopMenu(void)
 {
-    gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
-    SetMainCallback2(CB2_ReturnToField);
+    if (sMartInfo.martType == MART_TYPE_SELL_ONLY)
+    {
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    }
+    else
+    {
+        gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
+        SetMainCallback2(CB2_ReturnToField);
+    }
 }
 
 static void Task_HandleShopMenuQuit(u8 taskId)
@@ -1241,7 +1307,7 @@ static inline const u8 *BuyMenuGetItemDesc(u32 id)
 
 static inline u32 BuyMenuGetItemPrice(u32 id)
 {
-    if (sMartInfo.martType == MART_TYPE_NORMAL)
+    if (sMartInfo.martType == MART_TYPE_NORMAL || sMartInfo.martType == MART_TYPE_BUY_ONLY)
         return ItemId_GetPrice(sMartInfo.itemList[id]);
     else if (sMartInfo.martType == MART_TYPE_VARIABLE)
         return SearchItemListForPrice(sMartInfo.itemList[id]);
@@ -1578,7 +1644,7 @@ static void Task_BuyMenuTryBuyingItem(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u32 cost = BuyMenuGetItemPrice(GridMenu_SelectedIndex(sShopData->gridItems));
-    if (sMartInfo.martType <= MART_TYPE_VARIABLE)
+    if (sMartInfo.martType <= MART_TYPE_BUY_ONLY)
         sShopData->totalCost = (cost >> IsPokeNewsActive(POKENEWS_SLATEPORT));
     else
         sShopData->totalCost = cost;
@@ -1611,7 +1677,7 @@ static void Task_BuyMenuTryBuyingItem(u8 taskId)
     else
     {
         PlaySE(SE_SELECT);
-        if (sMartInfo.martType <= MART_TYPE_VARIABLE)
+        if (sMartInfo.martType <= MART_TYPE_BUY_ONLY)
         {
             CopyItemName(sShopData->currentItemId, gStringVar1);
             if (ItemId_GetImportance(sShopData->currentItemId))
@@ -1675,7 +1741,8 @@ static void Task_BuyMenuTryBuyingItem(u8 taskId)
 
 static inline void ExitBuyMenu(u8 taskId)
 {
-    gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
+    if (sMartInfo.martType != MART_TYPE_BUY_ONLY)
+        gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ExitBuyMenu;
 }
@@ -1783,7 +1850,7 @@ static void BuyMenuTryMakePurchase(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     FillWindowPixelBuffer(WIN_ITEM_DESCRIPTION, PIXEL_FILL(0));
-    if (sMartInfo.martType <= MART_TYPE_VARIABLE)
+    if (sMartInfo.martType <= MART_TYPE_BUY_ONLY)
     {
         if (AddBagItem(sShopData->currentItemId, tItemCount) == TRUE)
         {
@@ -1843,7 +1910,7 @@ static void BuyMenuSubtractMoney(u8 taskId)
     FillWindowPixelBuffer(WIN_MONEY, PIXEL_FILL(0));
     PrintMoneyLocal(WIN_MONEY, 0, GetMoney(&gSaveBlock1Ptr->money), 84, COLORID_NORMAL, TRUE);
 
-    if (sMartInfo.martType <= MART_TYPE_VARIABLE)
+    if (sMartInfo.martType <= MART_TYPE_BUY_ONLY)
         gTasks[taskId].func = Task_ReturnToItemListAfterItemPurchase;
     #ifdef MUDSKIP_OUTFIT_SYSTEM
     else if (sMartInfo.martType == MART_TYPE_OUTFIT)
@@ -1956,7 +2023,10 @@ static void Task_ExitBuyMenu(u8 taskId)
     if (!gPaletteFade.active)
     {
         BuyMenuFreeMemory();
-        SetMainCallback2(CB2_ReturnToField);
+        if (sMartInfo.martType == MART_TYPE_BUY_ONLY)
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        else
+            SetMainCallback2(CB2_ReturnToField);
         DestroyTask(taskId);
     }
 }
@@ -2042,6 +2112,20 @@ void NewShop_CreateCasinoMartMenu(const u16 *itemsForSale)
     SetShopItemsForSale(itemsForSale);
     ClearItemPurchases();
     SetShopMenuCallback(ScriptContext_Enable);
+}
+
+void NewShop_CreateBuyOnlyMartMenu(const u16 *itemsForSale)
+{
+    sMartInfo.martType = MART_TYPE_BUY_ONLY;
+    SetShopItemsForSale(itemsForSale);
+    ClearItemPurchases();
+    CreateTask(Task_HandleShopMenuBuy, 8);  //skip mart multichoice. go right to shop buy window
+}
+
+void NewShop_CreateSellOnlyMartMenu(void)
+{
+    sMartInfo.martType = MART_TYPE_SELL_ONLY;
+    CreateTask(Task_HandleShopMenuSell, 8);  //skip mart multichoice. go right to shop sell window
 }
 
 #endif // MUDSKIP_SHOP_UI
