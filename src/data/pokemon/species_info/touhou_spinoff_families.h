@@ -1340,7 +1340,7 @@ const struct SpeciesInfo gSpeciesInfoTouhouSpinoff[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE, EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_RUN_AWAY, ABILITY_RUN_AWAY },
+        .abilities = { ABILITY_RUN_AWAY, ABILITY_RUN_AWAY, ABILITY_PRANKSTER },
         .sourceGame = SOURCE_SPINOFF,
         .noFlip = TRUE,
         .speciesName = _("CStar"),
@@ -1350,10 +1350,8 @@ const struct SpeciesInfo gSpeciesInfoTouhouSpinoff[] =
         .height = 3,
         .weight = 100,
         .description = COMPOUND_STRING(
-            "When it battles, it stands on its hind legs\n"
-            "and attacks with its sharply clawed\n"
-            "forelegs. Its fur bristles if it encounters\n"
-            "any Seviper."),
+            "One of the three Light Fairies.\n"
+            "Has incredibly good eyesight."),
         .pokemonScale = 256,
         .pokemonOffset = 3,
         .trainerScale = 256,
@@ -1406,7 +1404,7 @@ const struct SpeciesInfo gSpeciesInfoTouhouSpinoff[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE, EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_WATER_ABSORB, ABILITY_FLORA_ABSORB },
+        .abilities = { ABILITY_WATER_ABSORB, ABILITY_FLORA_ABSORB, ABILITY_PRANKSTER },
         .sourceGame = SOURCE_SPINOFF,
         .noFlip = TRUE,
         .speciesName = _("Star"),
@@ -1416,10 +1414,9 @@ const struct SpeciesInfo gSpeciesInfoTouhouSpinoff[] =
         .height = 5,
         .weight = 250,
         .description = COMPOUND_STRING(
-            "Seviper and Zangoose are eternal rivals.\n"
-            "It counters a Zangoose's dazzling agility\n"
-            "with its swordlike tail, which also oozes\n"
-            "a horrible poison."),
+            "Scouts for the Light Fairies. It's\n"
+            "easy for her to see moving objects,\n"
+            "but unmoving objects present trouble."),
         .pokemonScale = 275,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -1467,7 +1464,7 @@ const struct SpeciesInfo gSpeciesInfoTouhouSpinoff[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE, EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_WATER_ABSORB, ABILITY_FLORA_ABSORB },
+        .abilities = { ABILITY_WATER_ABSORB, ABILITY_FLORA_ABSORB, ABILITY_PRANKSTER },
         .sourceGame = SOURCE_SPINOFF,
         .noFlip = TRUE,
         .speciesName = _("AStar"),
@@ -1528,7 +1525,7 @@ const struct SpeciesInfo gSpeciesInfoTouhouSpinoff[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE, EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_WATER_ABSORB, ABILITY_FLORA_ABSORB },
+        .abilities = { ABILITY_WATER_ABSORB, ABILITY_FLORA_ABSORB, ABILITY_PRANKSTER },
         .sourceGame = SOURCE_SPINOFF,
         .noFlip = TRUE,
         .speciesName = _("HStar"),

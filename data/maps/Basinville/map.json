@@ -19,7 +19,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ANABEL",
       "x": 14,
-      "y": 13,
+      "y": 14,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -33,7 +33,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ANABEL",
       "x": 27,
-      "y": 13,
+      "y": 14,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -45,9 +45,9 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_ANABEL",
+      "graphics_id": "OBJ_EVENT_GFX_GRETA",
       "x": 16,
-      "y": 13,
+      "y": 14,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -59,9 +59,9 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_ANABEL",
+      "graphics_id": "OBJ_EVENT_GFX_HAKOS_BAELZ",
       "x": 25,
-      "y": 13,
+      "y": 14,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -130,7 +130,7 @@
   ],
   "warp_events": [
     {
-      "x": 7,
+      "x": 6,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_BASINVILLE_STARTING_HOUSE",
@@ -144,8 +144,8 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 29,
-      "y": 18,
+      "x": 33,
+      "y": 14,
       "elevation": 0,
       "dest_map": "MAP_BASINVILLE",
       "dest_warp_id": "0"
