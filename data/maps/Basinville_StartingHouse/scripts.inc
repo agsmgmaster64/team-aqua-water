@@ -3,52 +3,54 @@ Basinville_StartingHouse_MapScripts::
 
 
 Basinville_StartingHouse_Shiori::
-# 10 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 12 "data/maps/Basinville_StartingHouse/scripts.pory"
 	lock
-# 11 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 13 "data/maps/Basinville_StartingHouse/scripts.pory"
+	faceplayer
+# 14 "data/maps/Basinville_StartingHouse/scripts.pory"
 	goto_if_unset FLAG_SYS_POKEMON_GET, Basinville_StartingHouse_Shiori_2
-# 16 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 19 "data/maps/Basinville_StartingHouse/scripts.pory"
 	setspeakername Basinville_StartingHouse_Text_ShioriName
-# 17 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 20 "data/maps/Basinville_StartingHouse/scripts.pory"
 	message Basinville_StartingHouse_Text_ShioriRegular
-# 18 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 21 "data/maps/Basinville_StartingHouse/scripts.pory"
 	waitmessage
 Basinville_StartingHouse_Shiori_5:
-# 20 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 23 "data/maps/Basinville_StartingHouse/scripts.pory"
 	call Basinville_StartingHouse_Shiori_PrepareMultichoice
-# 21 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 24 "data/maps/Basinville_StartingHouse/scripts.pory"
 	compare VAR_RESULT, 3
 	goto_if_gt Basinville_StartingHouse_Shiori_8
-# 24 "data/maps/Basinville_StartingHouse/scripts.pory"
-	switch VAR_RESULT
-# 25 "data/maps/Basinville_StartingHouse/scripts.pory"
-	case 0, Basinville_StartingHouse_Shiori_12
 # 27 "data/maps/Basinville_StartingHouse/scripts.pory"
+	switch VAR_RESULT
+# 28 "data/maps/Basinville_StartingHouse/scripts.pory"
+	case 0, Basinville_StartingHouse_Shiori_12
+# 30 "data/maps/Basinville_StartingHouse/scripts.pory"
 	case 1, Basinville_StartingHouse_Shiori_13
-# 29 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 32 "data/maps/Basinville_StartingHouse/scripts.pory"
 	case 2, Basinville_StartingHouse_Shiori_14
-# 31 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 34 "data/maps/Basinville_StartingHouse/scripts.pory"
 	case 3, Basinville_StartingHouse_Shiori_15
 Basinville_StartingHouse_Shiori_10:
-# 34 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 37 "data/maps/Basinville_StartingHouse/scripts.pory"
 	message Basinville_StartingHouse_Text_ShioriRegularAgain
-# 35 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 38 "data/maps/Basinville_StartingHouse/scripts.pory"
 	waitmessage
 	goto Basinville_StartingHouse_Shiori_5
 
 Basinville_StartingHouse_Shiori_2:
-# 12 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 15 "data/maps/Basinville_StartingHouse/scripts.pory"
 	call Basinville_StartingHouse_Shiori_StartingOut
-# 13 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 16 "data/maps/Basinville_StartingHouse/scripts.pory"
 	release
 	end
 
 Basinville_StartingHouse_Shiori_4:
-# 37 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 40 "data/maps/Basinville_StartingHouse/scripts.pory"
 	msgbox Basinville_StartingHouse_Text_ShioriRegular2
-# 38 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 41 "data/maps/Basinville_StartingHouse/scripts.pory"
 	hidespeakername
-# 39 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 42 "data/maps/Basinville_StartingHouse/scripts.pory"
 	release
 	end
 
@@ -56,145 +58,224 @@ Basinville_StartingHouse_Shiori_8:
 	goto Basinville_StartingHouse_Shiori_4
 
 Basinville_StartingHouse_Shiori_12:
-# 26 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 29 "data/maps/Basinville_StartingHouse/scripts.pory"
 	call Basinville_StartingHouse_Shiori_HealParty
 	goto Basinville_StartingHouse_Shiori_10
 
 Basinville_StartingHouse_Shiori_13:
-# 28 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 31 "data/maps/Basinville_StartingHouse/scripts.pory"
 	call Basinville_StartingHouse_Shiori_WaterShop
 	goto Basinville_StartingHouse_Shiori_10
 
 Basinville_StartingHouse_Shiori_14:
-# 30 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 33 "data/maps/Basinville_StartingHouse/scripts.pory"
 	call Basinville_StartingHouse_Shiori_SellItems
 	goto Basinville_StartingHouse_Shiori_10
 
 Basinville_StartingHouse_Shiori_15:
-# 32 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 35 "data/maps/Basinville_StartingHouse/scripts.pory"
 	call Basinville_StartingHouse_Shiori_Tangent
 	goto Basinville_StartingHouse_Shiori_10
 
 
 Basinville_StartingHouse_Shiori_PrepareMultichoice::
-# 44 "data/maps/Basinville_StartingHouse/scripts.pory"
-	dynmultipush Basinville_StartingHouse_Text_HealParty, 0
-# 45 "data/maps/Basinville_StartingHouse/scripts.pory"
-	dynmultipush Basinville_StartingHouse_Text_WaterShop, 1
-# 46 "data/maps/Basinville_StartingHouse/scripts.pory"
-	dynmultipush Basinville_StartingHouse_Text_SellItems, 2
 # 47 "data/maps/Basinville_StartingHouse/scripts.pory"
-	dynmultipush Basinville_StartingHouse_Text_Tangent, 3
+	dynmultipush Basinville_StartingHouse_Text_HealParty, 0
 # 48 "data/maps/Basinville_StartingHouse/scripts.pory"
-	dynmultipush Basinville_StartingHouse_Text_Nothing, 4
+	dynmultipush Basinville_StartingHouse_Text_WaterShop, 1
 # 49 "data/maps/Basinville_StartingHouse/scripts.pory"
+	dynmultipush Basinville_StartingHouse_Text_SellItems, 2
+# 50 "data/maps/Basinville_StartingHouse/scripts.pory"
+	dynmultipush Basinville_StartingHouse_Text_Tangent, 3
+# 51 "data/maps/Basinville_StartingHouse/scripts.pory"
+	dynmultipush Basinville_StartingHouse_Text_Nothing, 4
+# 52 "data/maps/Basinville_StartingHouse/scripts.pory"
 	dynmultistack 0, 0, FALSE, 5, FALSE, 0, NULL
 	return
 
 
 Basinville_StartingHouse_Shiori_StartingOut::
-# 54 "data/maps/Basinville_StartingHouse/scripts.pory"
-	setspeakername Basinville_StartingHouse_Text_ShioriName
-# 55 "data/maps/Basinville_StartingHouse/scripts.pory"
-	msgbox Basinville_StartingHouse_Text_ShioriSpeechStart
-# 56 "data/maps/Basinville_StartingHouse/scripts.pory"
-	hidespeakername
 # 57 "data/maps/Basinville_StartingHouse/scripts.pory"
-	setflag FLAG_SYS_B_DASH
-# 58 "data/maps/Basinville_StartingHouse/scripts.pory"
-	givemon SPECIES_CHIBI_STAR, 10, ITEM_GEYSER_WATER
-# 59 "data/maps/Basinville_StartingHouse/scripts.pory"
-	setflag FLAG_SYS_POKEMON_GET
-# 60 "data/maps/Basinville_StartingHouse/scripts.pory"
-	setflag FLAG_SYS_POKEDEX_GET
-# 61 "data/maps/Basinville_StartingHouse/scripts.pory"
 	setspeakername Basinville_StartingHouse_Text_ShioriName
+# 58 "data/maps/Basinville_StartingHouse/scripts.pory"
+	msgbox Basinville_StartingHouse_Text_ShioriSpeechStart
+# 59 "data/maps/Basinville_StartingHouse/scripts.pory"
+	hidespeakername
+# 60 "data/maps/Basinville_StartingHouse/scripts.pory"
+	setflag FLAG_SYS_B_DASH
+# 61 "data/maps/Basinville_StartingHouse/scripts.pory"
+	givemon SPECIES_CHIBI_STAR, 10, ITEM_GEYSER_WATER
 # 62 "data/maps/Basinville_StartingHouse/scripts.pory"
-	msgbox Basinville_StartingHouse_Text_ShioriSpeechStart2
+	playfanfare MUS_OBTAIN_ITEM
 # 63 "data/maps/Basinville_StartingHouse/scripts.pory"
+	message Basinville_StartingHouse_Text_YouGotCStar
+# 64 "data/maps/Basinville_StartingHouse/scripts.pory"
+	waitmessage
+# 65 "data/maps/Basinville_StartingHouse/scripts.pory"
+	waitfanfare
+# 66 "data/maps/Basinville_StartingHouse/scripts.pory"
+	msgbox Basinville_StartingHouse_Text_WouldLikeToNickname, MSGBOX_YESNO
+# 67 "data/maps/Basinville_StartingHouse/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq Basinville_StartingHouse_Shiori_StartingOut_2
+Basinville_StartingHouse_Shiori_StartingOut_1:
+# 73 "data/maps/Basinville_StartingHouse/scripts.pory"
+	setflag FLAG_SYS_POKEMON_GET
+# 74 "data/maps/Basinville_StartingHouse/scripts.pory"
+	setflag FLAG_SYS_POKEDEX_GET
+# 75 "data/maps/Basinville_StartingHouse/scripts.pory"
+	setspeakername Basinville_StartingHouse_Text_ShioriName
+# 76 "data/maps/Basinville_StartingHouse/scripts.pory"
+	msgbox Basinville_StartingHouse_Text_ShioriSpeechStart2
+# 77 "data/maps/Basinville_StartingHouse/scripts.pory"
 	hidespeakername
 	return
 
+Basinville_StartingHouse_Shiori_StartingOut_2:
+# 68 "data/maps/Basinville_StartingHouse/scripts.pory"
+	setvar VAR_0x8004, 0
+# 69 "data/maps/Basinville_StartingHouse/scripts.pory"
+	fadescreen FADE_TO_BLACK
+# 70 "data/maps/Basinville_StartingHouse/scripts.pory"
+	special ChangePokemonNickname
+# 71 "data/maps/Basinville_StartingHouse/scripts.pory"
+	waitstate
+	goto Basinville_StartingHouse_Shiori_StartingOut_1
+
+
+Basinville_StartingHouse_Shiori_WaitStartingOut::
+# 82 "data/maps/Basinville_StartingHouse/scripts.pory"
+	lockall
+# 83 "data/maps/Basinville_StartingHouse/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, Basinville_StartingHouse_PlayerLookUp
+# 84 "data/maps/Basinville_StartingHouse/scripts.pory"
+	applymovement 1, Basinville_StartingHouse_ShioriMoveInPlace
+# 85 "data/maps/Basinville_StartingHouse/scripts.pory"
+	waitmovement 0
+# 86 "data/maps/Basinville_StartingHouse/scripts.pory"
+	setspeakername Basinville_StartingHouse_Text_ShioriName
+# 87 "data/maps/Basinville_StartingHouse/scripts.pory"
+	msgbox Basinville_StartingHouse_Text_ShioriSeeYou
+# 88 "data/maps/Basinville_StartingHouse/scripts.pory"
+	closemessage
+# 89 "data/maps/Basinville_StartingHouse/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, Basinville_StartingHouse_PlayerWalkUp
+# 90 "data/maps/Basinville_StartingHouse/scripts.pory"
+	waitmovement 0
+# 91 "data/maps/Basinville_StartingHouse/scripts.pory"
+	call Basinville_StartingHouse_Shiori_StartingOut
+# 92 "data/maps/Basinville_StartingHouse/scripts.pory"
+	releaseall
+	end
+
 
 Basinville_StartingHouse_Shiori_HealParty::
-# 68 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 97 "data/maps/Basinville_StartingHouse/scripts.pory"
 	msgbox Basinville_StartingHouse_Text_ShioriHeal
-# 69 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 98 "data/maps/Basinville_StartingHouse/scripts.pory"
 	closemessage
-# 70 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 99 "data/maps/Basinville_StartingHouse/scripts.pory"
 	fadescreen FADE_TO_BLACK
-# 71 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 100 "data/maps/Basinville_StartingHouse/scripts.pory"
 	playfanfare MUS_HEAL
-# 72 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 101 "data/maps/Basinville_StartingHouse/scripts.pory"
 	waitfanfare
-# 73 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 102 "data/maps/Basinville_StartingHouse/scripts.pory"
 	special HealPlayerParty
-# 74 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 103 "data/maps/Basinville_StartingHouse/scripts.pory"
 	callnative UpdateFollowingPokemon
-# 75 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 104 "data/maps/Basinville_StartingHouse/scripts.pory"
 	fadescreen FADE_FROM_BLACK
-# 76 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 105 "data/maps/Basinville_StartingHouse/scripts.pory"
 	setspeakername Basinville_StartingHouse_Text_ShioriName
-# 77 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 106 "data/maps/Basinville_StartingHouse/scripts.pory"
 	msgbox Basinville_StartingHouse_Text_ShioriHeal2
 	return
 
 
 Basinville_StartingHouse_Shiori_WaterShop::
-# 82 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 111 "data/maps/Basinville_StartingHouse/scripts.pory"
 	msgbox Basinville_StartingHouse_Text_ShioriShop
-# 83 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 112 "data/maps/Basinville_StartingHouse/scripts.pory"
 	buyonlymart Basinville_StartingHouse_Shiori_WaterShopItems
 	return
 
 
 Basinville_StartingHouse_Shiori_SellItems::
-# 88 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 117 "data/maps/Basinville_StartingHouse/scripts.pory"
 	msgbox Basinville_StartingHouse_Text_ShioriSell
-# 89 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 118 "data/maps/Basinville_StartingHouse/scripts.pory"
 	itemseller
 	return
 
 
 Basinville_StartingHouse_Shiori_Tangent::
-# 94 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 123 "data/maps/Basinville_StartingHouse/scripts.pory"
 	msgbox Basinville_StartingHouse_Text_ShioriTangent
 	return
 
 
+# 127 "data/maps/Basinville_StartingHouse/scripts.pory"
+Basinville_StartingHouse_PlayerLookUp:
+# 128 "data/maps/Basinville_StartingHouse/scripts.pory"
+	face_up
+	step_end
+
+# 131 "data/maps/Basinville_StartingHouse/scripts.pory"
+Basinville_StartingHouse_ShioriMoveInPlace:
+# 132 "data/maps/Basinville_StartingHouse/scripts.pory"
+	walk_in_place_down
+	step_end
+
+# 135 "data/maps/Basinville_StartingHouse/scripts.pory"
+Basinville_StartingHouse_PlayerWalkUp:
+# 136 "data/maps/Basinville_StartingHouse/scripts.pory"
+	walk_up
+# 136 "data/maps/Basinville_StartingHouse/scripts.pory"
+	walk_up
+# 136 "data/maps/Basinville_StartingHouse/scripts.pory"
+	walk_up
+	step_end
+
 	.align 2
-# 98 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 139 "data/maps/Basinville_StartingHouse/scripts.pory"
 Basinville_StartingHouse_Shiori_WaterShopItems:
-# 99 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 140 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.2byte ITEM_GEYSER_WATER
 	.2byte ITEM_NONE
 
 Basinville_StartingHouse_Text_ShioriName::
-# 102 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 143 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Shiori$"
 
 Basinville_StartingHouse_Text_HealParty::
-# 106 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 147 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Heal Party$"
 
 Basinville_StartingHouse_Text_WaterShop::
-# 110 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 151 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Water Shop$"
 
 Basinville_StartingHouse_Text_SellItems::
-# 114 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 155 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Sell Items$"
 
 Basinville_StartingHouse_Text_Tangent::
-# 118 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 159 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Tangent$"
 
 Basinville_StartingHouse_Text_Nothing::
-# 122 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 163 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Nothing$"
 
+Basinville_StartingHouse_Text_ShioriSeeYou::
+# 167 "data/maps/Basinville_StartingHouse/scripts.pory"
+	.string "Hey, you just got here, what's the rush?\p"
+	.string "You got some stuff from me that you're\n"
+	.string "missing here.$"
+
 Basinville_StartingHouse_Text_ShioriSpeechStart::
-# 126 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 172 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Heya! {PLAYER}, was it? Well, welcome\n"
 	.string "to the new village that is Basinville.\p"
 	.string "Probably a new sight for you, huh?\p"
@@ -211,12 +292,16 @@ Basinville_StartingHouse_Text_ShioriSpeechStart::
 	.string "as what seems to be a Dex for archiving\l"
 	.string "what you find.$"
 
-Basinville_StartingHouse_Text_YouGotStuff::
-# 135 "data/maps/Basinville_StartingHouse/scripts.pory"
-	.string "You got$"
+Basinville_StartingHouse_Text_YouGotCStar::
+# 181 "data/maps/Basinville_StartingHouse/scripts.pory"
+	.string "You got your own CStar along with a Dex!$"
+
+Basinville_StartingHouse_Text_WouldLikeToNickname::
+# 185 "data/maps/Basinville_StartingHouse/scripts.pory"
+	.string "Would you like to nickname your CStar?$"
 
 Basinville_StartingHouse_Text_ShioriSpeechStart2::
-# 139 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 189 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Oh yeah, your Puppets can follow you as\n"
 	.string "well.\p"
 	.string "It just seems a bit cute seeing your\n"
@@ -237,39 +322,39 @@ Basinville_StartingHouse_Text_ShioriSpeechStart2::
 	.string "drink.$"
 
 Basinville_StartingHouse_Text_ShioriRegular::
-# 148 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 198 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Heya, anything you want me to do right\n"
 	.string "now?$"
 
 Basinville_StartingHouse_Text_ShioriRegularAgain::
-# 152 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 202 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Alright, anything else you want me to do\n"
 	.string "right now?$"
 
 Basinville_StartingHouse_Text_ShioriRegular2::
-# 156 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 206 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Have a nice day in the village then.$"
 
 Basinville_StartingHouse_Text_ShioriHeal::
-# 160 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 210 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Sure, let me just help your party out\n"
 	.string "then.$"
 
 Basinville_StartingHouse_Text_ShioriHeal2::
-# 164 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 214 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "There, your Puppets should be all\n"
 	.string "better now.$"
 
 Basinville_StartingHouse_Text_ShioriShop::
-# 168 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 218 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Well, my waters are here if you wanna\n"
 	.string "buy any.$"
 
 Basinville_StartingHouse_Text_ShioriSell::
-# 172 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 222 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Alright, let me see what you have to\n"
 	.string "offer then.$"
 
 Basinville_StartingHouse_Text_ShioriTangent::
-# 176 "data/maps/Basinville_StartingHouse/scripts.pory"
+# 226 "data/maps/Basinville_StartingHouse/scripts.pory"
 	.string "Yap yap yap.$"

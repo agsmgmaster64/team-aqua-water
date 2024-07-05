@@ -6,8 +6,11 @@ const MULTI_SELL_ITEMS = 2
 const MULTI_TANGENT = 3
 const MULTI_NOTHING = 4
 
+const LOCALID_SHIORI = 1
+
 script Basinville_StartingHouse_Shiori {
     lock
+    faceplayer
     if (!flag(FLAG_SYS_POKEMON_GET)) {
         call(Basinville_StartingHouse_Shiori_StartingOut)
         release
@@ -56,12 +59,38 @@ script Basinville_StartingHouse_Shiori_StartingOut {
     hidespeakername
     setflag(FLAG_SYS_B_DASH)
     givemon(SPECIES_CHIBI_STAR, 10, ITEM_GEYSER_WATER)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(Basinville_StartingHouse_Text_YouGotCStar)
+    waitmessage
+    waitfanfare
+    msgbox(Basinville_StartingHouse_Text_WouldLikeToNickname, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == TRUE) {
+        setvar(VAR_0x8004, 0)
+        fadescreen(FADE_TO_BLACK)
+        special(ChangePokemonNickname)
+        waitstate
+    }
     setflag(FLAG_SYS_POKEMON_GET)
     setflag(FLAG_SYS_POKEDEX_GET)
     setspeakername(Basinville_StartingHouse_Text_ShioriName)
     msgbox(Basinville_StartingHouse_Text_ShioriSpeechStart2)
     hidespeakername
     return
+}
+
+script Basinville_StartingHouse_Shiori_WaitStartingOut {
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, Basinville_StartingHouse_PlayerLookUp)
+    applymovement(LOCALID_SHIORI, Basinville_StartingHouse_ShioriMoveInPlace)
+    waitmovement(0)
+    setspeakername(Basinville_StartingHouse_Text_ShioriName)
+    msgbox(Basinville_StartingHouse_Text_ShioriSeeYou)
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, Basinville_StartingHouse_PlayerWalkUp)
+    waitmovement(0)
+    call(Basinville_StartingHouse_Shiori_StartingOut)
+    releaseall
+    end
 }
 
 script Basinville_StartingHouse_Shiori_HealParty {
@@ -95,6 +124,18 @@ script Basinville_StartingHouse_Shiori_Tangent {
     return
 }
 
+movement Basinville_StartingHouse_PlayerLookUp {
+    face_up
+}
+
+movement Basinville_StartingHouse_ShioriMoveInPlace {
+    walk_in_place_down
+}
+
+movement Basinville_StartingHouse_PlayerWalkUp {
+    walk_up * 3
+}
+
 mart Basinville_StartingHouse_Shiori_WaterShopItems {
     ITEM_GEYSER_WATER
 }
@@ -123,6 +164,11 @@ text Basinville_StartingHouse_Text_Nothing {
     "Nothing"
 }
 
+text Basinville_StartingHouse_Text_ShioriSeeYou {
+    format("Hey, you just got here, what's the rush?\p
+    You got some stuff from me that you're missing here.")
+}
+
 text Basinville_StartingHouse_Text_ShioriSpeechStart {
     format("Heya! {PLAYER}, was it? Well, welcome to the new village that is Basinville.\p
     Probably a new sight for you, huh?\p
@@ -132,8 +178,12 @@ text Basinville_StartingHouse_Text_ShioriSpeechStart {
     Here, I have this Puppet for you, as well as what seems to be a Dex for archiving what you find.")
 }
 
-text Basinville_StartingHouse_Text_YouGotStuff {
-    format("You got ")
+text Basinville_StartingHouse_Text_YouGotCStar {
+    format("You got your own CStar along with a Dex!")
+}
+
+text Basinville_StartingHouse_Text_WouldLikeToNickname {
+    format("Would you like to nickname your CStar?")
 }
 
 text Basinville_StartingHouse_Text_ShioriSpeechStart2 {

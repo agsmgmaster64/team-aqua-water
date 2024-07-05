@@ -1,5 +1,247 @@
-raw `
-Basinville_MapScripts::
-	.byte 0
+const LOCALID_BAELZ = 4
+const LOCALID_CECILIA = 3
+const LOCALID_STUPID_RAT = 2
+const LOCALID_BOB_OMB = 1
 
-`
+const MULTI_BUY = 0
+const MULTI_SELL = 1
+const MULTI_TALK = 2
+const MULTI_EXIT = 3
+
+const MULTI_TALK_CECILIA = 0
+const MULTI_TALK_DOING_HERE = 1
+const MULTI_TALK_TEA_1 = 2
+const MULTI_TALK_COFFEE_1 = 3
+const MULTI_TALK_EXIT = 4
+
+const MULTI_TALK_BAELZ = 0
+const MULTI_TALK_COFFEE_2 = 2
+const MULTI_TALK_TEA_2 = 3
+
+mapscripts Basinville_MapScripts {
+	MAP_SCRIPT_ON_FRAME_TABLE [
+		VAR_BASINVILLE_STATE, 0: Basinville_EventScript_IntroCoffeeVsTea
+	]
+}
+
+script Basinville_EventScript_IntroCoffeeVsTea {
+	lockall
+	msgbox(Basinville_Text_HeyPlayer)
+	setspeakername(Basinville_Text_CeciliaName)
+	setvar(VAR_BASINVILLE_STATE, 1)
+	releaseall
+	end
+}
+
+script Basinville_EventScript_HakosBaelz {
+	lock
+	faceplayer
+	setspeakername(Basinville_Text_BaelzName)
+	msgbox("Among Us")
+	release
+	end
+}
+
+script Basinville_EventScript_CeciliaImmergreen {
+	lock
+	faceplayer
+	setspeakername(Basinville_Text_CeciliaName)
+	msgbox("Among Us")
+	release
+	end
+}
+
+script Basinville_EventScript_BobOmb {
+	lock
+	faceplayer
+	setspeakername(Basinville_Text_BobOmbName)
+	message(Basinville_Text_BobOmbShopIntro)
+	waitmessage
+	while {
+		call(Basinville_EventScript_PrepareUTShopMultichoice)
+        if (var(VAR_RESULT) > MULTI_TALK) {
+            break
+        }
+        switch (var(VAR_RESULT)) {
+            case MULTI_BUY:
+                call(Basinville_EventScript_BobOmb_Buy)
+            case MULTI_SELL:
+                call(Basinville_EventScript_BobOmb_Sell)
+            case MULTI_TALK:
+                call(Basinville_EventScript_BobOmb_Talk)
+        }
+        message(Basinville_Text_BobOmbShopKeep)
+        waitmessage
+	}
+	msgbox(Basinville_Text_BobOmbShopExit)
+	release
+	end
+}
+
+script Basinville_EventScript_BobOmb_Buy{
+	msgbox(Basinville_Text_BobOmbShopBuy)
+	buyonlymart(Basinville_Mart_BobOmb)
+	return
+}
+
+script Basinville_EventScript_BobOmb_Sell{
+	msgbox(Basinville_Text_BobOmbShopSell)
+	return
+}
+
+script Basinville_EventScript_BobOmb_Talk{
+	while {
+		message(Basinville_Text_BobOmbShopTalk)
+		waitmessage
+		call(Basinville_EventScript_PrepareBobOmbTalkMultichoice)
+        if (var(VAR_RESULT) > MULTI_TALK_COFFEE_1) {
+            break
+        }
+        switch (var(VAR_RESULT)) {
+			case MULTI_TALK_CECILIA:
+				msgbox(Basinville_Text_BobOmbShopTalk_Cecilia)
+			case MULTI_TALK_DOING_HERE:
+				msgbox(Basinville_Text_BobOmbShopTalk_DoingHere)
+			case MULTI_TALK_TEA_1:
+				msgbox(Basinville_Text_BobOmbShopTalk_Tea)
+			case MULTI_TALK_COFFEE_1:
+				msgbox(Basinville_Text_BobOmbShopTalk_Coffee)
+		}
+	}
+	return
+}
+
+script Basinville_EventScript_StupidRat {
+	lock
+	faceplayer
+	msgbox("Among Us")
+	release
+	end
+}
+
+script Basinville_EventScript_PrepareUTShopMultichoice {
+    dynmultipush(Basinville_Text_Buy, MULTI_BUY)
+    dynmultipush(Basinville_Text_Sell, MULTI_SELL)
+    dynmultipush(Basinville_Text_Talk, MULTI_TALK)
+    dynmultipush(Basinville_Text_Exit, MULTI_EXIT)
+    dynmultistack(0, 0, FALSE, 4, FALSE, MULTI_BUY, NULL)
+    return
+}
+
+script Basinville_EventScript_PrepareBobOmbTalkMultichoice {
+    dynmultipush(Basinville_Text_CeciliaName, MULTI_TALK_CECILIA)
+    dynmultipush(Basinville_Text_DoingHere, MULTI_TALK_DOING_HERE)
+    dynmultipush(Basinville_Text_Tea, MULTI_TALK_TEA_1)
+    dynmultipush(Basinville_Text_Coffee, MULTI_TALK_COFFEE_1)
+    dynmultipush(Basinville_Text_Exit, MULTI_TALK_EXIT)
+    dynmultistack(0, 0, FALSE, 5, FALSE, MULTI_TALK_CECILIA, NULL)
+    return
+}
+
+mart Basinville_Mart_BobOmb {
+	ITEM_SCARLET_TEA
+}
+
+text Basinville_Text_Buy {
+	"Buy"
+}
+
+text Basinville_Text_Sell {
+	"Sell"
+}
+
+text Basinville_Text_Talk {
+	"Talk"
+}
+
+text Basinville_Text_Exit {
+	"Exit"
+}
+
+text Basinville_Text_Tea {
+	"Tea"
+}
+
+text Basinville_Text_Coffee {
+	"Coffee"
+}
+
+text Basinville_Text_DoingHere {
+	"Doing Here"
+}
+
+text Basinville_Text_StupidRatName {
+	"Stupid Rat"
+}
+
+text Basinville_Text_BobOmbName {
+	"Bob-omb"
+}
+
+text Basinville_Text_BaelzName {
+	"Baelz"
+}
+
+text Basinville_Text_CeciliaName {
+	"Cecilia"
+}
+
+text Basinville_Text_BobOmbShopIntro {
+	format("Heya, welcome to our little Tea Shop! Glad to see someone who likes Tea here.")
+}
+
+text Basinville_Text_BobOmbShopBuy {
+	format("Sure, come look at we have here.")
+}
+
+text Basinville_Text_BobOmbShopSell {
+	format("Ehh, we are just a Tea shop here, we don't really have much to give you in return for what you have.\p"
+	"Besides, we'd only accept Tea here anyways.")
+}
+
+text Basinville_Text_BobOmbShopTalk {
+	format("I've got time for some chit-chat here.")
+}
+
+text Basinville_Text_BobOmbShopTalk_Cecilia {
+	format("Cecilia...\pShe certainly is an interesting person to be around, that I will say.\p"
+	"She is certainly charming in her own way, although don't be fooled by her appearance and think she's just a regular lady.\p")
+}
+
+text Basinville_Text_BobOmbShopTalk_DoingHere {
+	format("So apparently, Cecilia and Bae wanted to make a bet on whether random people would prefer Tea or Coffee.\p"
+	"Some weird ironing out the details later, they decided on this random village here since the people here have water"
+	"to make either of those things.\p"
+	"It took a decent amount to get here, considering she can't drive, so I had to take up the mantle of getting us here.\p"
+	"At the very least, we still have a bunch of Tea to go around for the village here.")
+}
+
+text Basinville_Text_BobOmbShopTalk_Tea {
+	format("Man, Tea's just my kind of drink of choice.\p"
+	"I wouldn't be doing this shop if it wasn't the case.\p"
+	"It's just a good boost of energy to get me through the day whenever I need it.\p"
+	"It's pretty simple to make as well, which I bet this village would appreciate here, especially with their farm they have.\p"
+	"They also can have different sweet flavors as well depending on what type of leaves you put on it.\p"
+	"Ahh, tea, my beloved.")
+}
+
+text Basinville_Text_BobOmbShopTalk_Coffee {
+	format("............\p"
+	"Very interesting topic you bring up.\p"
+	"Coffee, it's just not my thing at all, not anywhere near Tea in my opinion.\p"
+	"While yes, it does bring that energy quicker and with much more force, it isn't always the thing you need.\p"
+	"The crash once that energy boost is over as well, it's pretty terrible.\p"
+	"It's just a lot more complicated to be drinking Coffee than Tea, personally.")
+}
+
+text Basinville_Text_BobOmbShopKeep {
+	format("Nice to see a Tea enthusiast here.")
+}
+
+text Basinville_Text_BobOmbShopExit {
+	format("Hope to see you again, fellow Otomo.")
+}
+
+text Basinville_Text_HeyPlayer {
+	format("Hey you, {PLAYER}.")
+}

@@ -2,7 +2,7 @@
   "id": "MAP_BASINVILLE_STARTING_HOUSE",
   "name": "Basinville_StartingHouse",
   "layout": "LAYOUT_BASINVILLE_STARTING_HOUSE",
-  "music": "MUS_DUMMY",
+  "music": "MUS_ZGS_EIKI_ISLAND",
   "region_map_section": "MAPSEC_ABANDONED_SHIP",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -43,11 +43,11 @@
     {
       "type": "trigger",
       "x": 5,
-      "y": 7,
+      "y": 8,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
+      "var": "FLAG_SYS_POKEMON_GET",
       "var_value": "0",
-      "script": "NULL"
+      "script": "Basinville_StartingHouse_Shiori_WaitStartingOut"
     }
   ],
   "bg_events": [
