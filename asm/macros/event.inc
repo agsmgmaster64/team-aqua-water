@@ -2351,6 +2351,25 @@
 	setspeakername NULL
 	.endm
 
+	@ Draws the mughshot declared into its default spot
+	.macro drawmugshot mugshot:req
+	callnative DrawMugshot
+	.2byte \mugshot
+	.endm
+
+	@ Draws the mughshot declared into its default spot
+	.macro drawmugshot_atpos mugshot:req top:req left:req
+	callnative DrawMugshotAtPos
+	.2byte \mugshot
+	.2byte \top
+	.2byte \left
+	.endm
+
+	@ Clears any mugshot showing
+	.macro clearmugshot
+	callnative ClearMugshot
+	.endm
+
 	@ Saves species and forms of Daycare Pokémon to specific vars. Saves the amount of Daycare mon to VAR_RESULT.
 	.macro getdaycaregfx varSpecies1:req varSpecies2:req varForm1:req varForm2:req
 	callnative GetDaycareGraphics

@@ -26,8 +26,8 @@ mapscripts Basinville_MapScripts {
 
 script Basinville_EventScript_IntroCoffeeVsTea {
 	lockall
-	msgbox(Basinville_Text_HeyPlayer)
 	setspeakername(Basinville_Text_CeciliaName)
+	msgbox(Basinville_Text_HeyPlayer)
 	setvar(VAR_BASINVILLE_STATE, 1)
 	releaseall
 	end
@@ -114,7 +114,10 @@ script Basinville_EventScript_BobOmb_Talk{
 script Basinville_EventScript_StupidRat {
 	lock
 	faceplayer
+	setspeakername(Basinville_Text_StupidRatName)
+	drawmugshot(MUGSHOT_STUPID_RAT)
 	msgbox("Among Us")
+	clearmugshot
 	release
 	end
 }
