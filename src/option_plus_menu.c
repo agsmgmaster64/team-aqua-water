@@ -504,6 +504,7 @@ static void VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
+    ChangeBgX(3, 96, BG_COORD_ADD);
     ChangeBgY(3, 96, BG_COORD_ADD);
 }
 

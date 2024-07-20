@@ -411,7 +411,6 @@ static void MainMenu_VBlankCB(void)
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
     ChangeBgX(2, 128, BG_COORD_SUB); // This controls the scrolling of the scroll bg, remove it to stop scrolling
-    ChangeBgY(2, 128, BG_COORD_SUB); // This controls the scrolling of the scroll bg, remove it to stop scrolling
 }
 
 //

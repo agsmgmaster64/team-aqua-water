@@ -964,7 +964,6 @@ static void StartMenuFull_VBlankCB(void)
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
     ChangeBgX(2, 128, BG_COORD_SUB); // controls the background scrolling
-    ChangeBgY(2, 128, BG_COORD_SUB); // controls the background scrolling
 }
 
 static bool8 StartMenuFull_DoGfxSetup(void) // base UI loader from Ghouls UI Shell branch, does the important hardware stuff to setup a UI
