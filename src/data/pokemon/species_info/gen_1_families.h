@@ -682,331 +682,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #endif //P_COSPLAY_PIKACHU_FORMS
 
 #if P_CAP_PIKACHU_FORMS
-    [SPECIES_PIKACHU_HOENN_CAP] =
-    {
-        .baseHP        = 35,
-        .baseAttack    = 55,
-        .baseDefense   = P_UPDATED_STATS >= GEN_6 ? 40 : 30,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 50,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 50 : 40,
-        .types = MON_TYPES(TYPE_WIND),
-        .catchRate = 190,
-        .expYield = PIKACHU_EXP_YIELD,
-        .evYield_Speed = 2,
-        .itemRare = ITEM_ICY_BALL,
-        .genderRatio = MON_MALE,
-        .eggCycles = 10,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },
-        .sourceGame = SOURCE_IN,
-        .speciesName = _("Pikachu"),
-        .cryId = CRY_PORYGON,
-        .natDexNum = NATIONAL_DEX_CHIBI_KOAKUMA,
-        .categoryName = _("Mouse"),
-        .height = 4,
-        .weight = 60,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed during adventures\n"
-            "across the Hoenn region together."),
-        .pokemonScale = 479,
-        .pokemonOffset = 19,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        .frontPic = gMonFrontPic_PikachuHoennCap,
-        .frontPicSize = MON_COORDS_SIZE(48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuHoennCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_PikachuHoennCap,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_PikachuHoennCap,
-        .shinyPalette = gMonShinyPalette_PikachuHoennCap,
-        .iconSprite = gMonIcon_PikachuHoennCap,
-        .iconPalIndex = 0,
-        FOOTPRINT(Pikachu)
-        .levelUpLearnset = sPikachuLevelUpLearnset,
-        .teachableLearnset = sPikachuTeachableLearnset,
-        .formSpeciesIdTable = sPikachuFormSpeciesIdTable,
-    },
-
-    [SPECIES_PIKACHU_SINNOH_CAP] =
-    {
-        .baseHP        = 35,
-        .baseAttack    = 55,
-        .baseDefense   = P_UPDATED_STATS >= GEN_6 ? 40 : 30,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 50,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 50 : 40,
-        .types = MON_TYPES(TYPE_WIND),
-        .catchRate = 190,
-        .expYield = PIKACHU_EXP_YIELD,
-        .evYield_Speed = 2,
-        .itemRare = ITEM_ICY_BALL,
-        .genderRatio = MON_MALE,
-        .eggCycles = 10,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },
-        .sourceGame = SOURCE_IN,
-        .speciesName = _("Pikachu"),
-        .cryId = CRY_PORYGON,
-        .natDexNum = NATIONAL_DEX_CHIBI_KOAKUMA,
-        .categoryName = _("Mouse"),
-        .height = 4,
-        .weight = 60,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed during adventures\n"
-            "across the Sinnoh region together."),
-        .pokemonScale = 479,
-        .pokemonOffset = 19,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        .frontPic = gMonFrontPic_PikachuSinnohCap,
-        .frontPicSize = MON_COORDS_SIZE(48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuSinnohCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_PikachuSinnohCap,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_PikachuSinnohCap,
-        .shinyPalette = gMonShinyPalette_PikachuSinnohCap,
-        .iconSprite = gMonIcon_PikachuSinnohCap,
-        .iconPalIndex = 0,
-        FOOTPRINT(Pikachu)
-        .levelUpLearnset = sPikachuLevelUpLearnset,
-        .teachableLearnset = sPikachuTeachableLearnset,
-        .formSpeciesIdTable = sPikachuFormSpeciesIdTable,
-    },
-
-    [SPECIES_PIKACHU_UNOVA_CAP] =
-    {
-        .baseHP        = 35,
-        .baseAttack    = 55,
-        .baseDefense   = P_UPDATED_STATS >= GEN_6 ? 40 : 30,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 50,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 50 : 40,
-        .types = MON_TYPES(TYPE_WIND),
-        .catchRate = 190,
-        .expYield = PIKACHU_EXP_YIELD,
-        .evYield_Speed = 2,
-        .itemRare = ITEM_ICY_BALL,
-        .genderRatio = MON_MALE,
-        .eggCycles = 10,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },
-        .sourceGame = SOURCE_IN,
-        .speciesName = _("Pikachu"),
-        .cryId = CRY_PORYGON,
-        .natDexNum = NATIONAL_DEX_CHIBI_KOAKUMA,
-        .categoryName = _("Mouse"),
-        .height = 4,
-        .weight = 60,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed during adventures\n"
-            "across the Unova region together."),
-        .pokemonScale = 479,
-        .pokemonOffset = 19,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        .frontPic = gMonFrontPic_PikachuUnovaCap,
-        .frontPicSize = MON_COORDS_SIZE(48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuUnovaCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_PikachuUnovaCap,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_PikachuUnovaCap,
-        .shinyPalette = gMonShinyPalette_PikachuUnovaCap,
-        .iconSprite = gMonIcon_PikachuUnovaCap,
-        .iconPalIndex = 0,
-        FOOTPRINT(Pikachu)
-        .levelUpLearnset = sPikachuLevelUpLearnset,
-        .teachableLearnset = sPikachuTeachableLearnset,
-        .formSpeciesIdTable = sPikachuFormSpeciesIdTable,
-    },
-
-    [SPECIES_PIKACHU_KALOS_CAP] =
-    {
-        .baseHP        = 35,
-        .baseAttack    = 55,
-        .baseDefense   = P_UPDATED_STATS >= GEN_6 ? 40 : 30,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 50,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 50 : 40,
-        .types = MON_TYPES(TYPE_WIND),
-        .catchRate = 190,
-        .expYield = PIKACHU_EXP_YIELD,
-        .evYield_Speed = 2,
-        .itemRare = ITEM_ICY_BALL,
-        .genderRatio = MON_MALE,
-        .eggCycles = 10,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },
-        .sourceGame = SOURCE_IN,
-        .speciesName = _("Pikachu"),
-        .cryId = CRY_PORYGON,
-        .natDexNum = NATIONAL_DEX_CHIBI_KOAKUMA,
-        .categoryName = _("Mouse"),
-        .height = 4,
-        .weight = 60,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed during adventures\n"
-            "across the Kalos region together."),
-        .pokemonScale = 479,
-        .pokemonOffset = 19,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        .frontPic = gMonFrontPic_PikachuKalosCap,
-        .frontPicSize = MON_COORDS_SIZE(48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuKalosCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_PikachuKalosCap,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_PikachuKalosCap,
-        .shinyPalette = gMonShinyPalette_PikachuKalosCap,
-        .iconSprite = gMonIcon_PikachuKalosCap,
-        .iconPalIndex = 0,
-        FOOTPRINT(Pikachu)
-        .levelUpLearnset = sPikachuLevelUpLearnset,
-        .teachableLearnset = sPikachuTeachableLearnset,
-        .formSpeciesIdTable = sPikachuFormSpeciesIdTable,
-    },
-
-    [SPECIES_PIKACHU_ALOLA_CAP] =
-    {
-        .baseHP        = 35,
-        .baseAttack    = 55,
-        .baseDefense   = P_UPDATED_STATS >= GEN_6 ? 40 : 30,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 50,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 50 : 40,
-        .types = MON_TYPES(TYPE_WIND),
-        .catchRate = 190,
-        .expYield = PIKACHU_EXP_YIELD,
-        .evYield_Speed = 2,
-        .itemRare = ITEM_ICY_BALL,
-        .genderRatio = MON_MALE,
-        .eggCycles = 10,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },
-        .sourceGame = SOURCE_IN,
-        .speciesName = _("Pikachu"),
-        .cryId = CRY_PORYGON,
-        .natDexNum = NATIONAL_DEX_CHIBI_KOAKUMA,
-        .categoryName = _("Mouse"),
-        .height = 4,
-        .weight = 60,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed during adventures\n"
-            "across the Alola region together."),
-        .pokemonScale = 479,
-        .pokemonOffset = 19,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        .frontPic = gMonFrontPic_PikachuAlolaCap,
-        .frontPicSize = MON_COORDS_SIZE(48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuAlolaCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_PikachuAlolaCap,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_PikachuAlolaCap,
-        .shinyPalette = gMonShinyPalette_PikachuAlolaCap,
-        .iconSprite = gMonIcon_PikachuAlolaCap,
-        .iconPalIndex = 0,
-        FOOTPRINT(Pikachu)
-        .levelUpLearnset = sPikachuLevelUpLearnset,
-        .teachableLearnset = sPikachuTeachableLearnset,
-        .formSpeciesIdTable = sPikachuFormSpeciesIdTable,
-    },
-
-    [SPECIES_PIKACHU_PARTNER_CAP] =
-    {
-        .baseHP        = 35,
-        .baseAttack    = 55,
-        .baseDefense   = P_UPDATED_STATS >= GEN_6 ? 40 : 30,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 50,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 50 : 40,
-        .types = MON_TYPES(TYPE_WIND),
-        .catchRate = 190,
-        .expYield = PIKACHU_EXP_YIELD,
-        .evYield_Speed = 2,
-        .itemRare = ITEM_ICY_BALL,
-        .genderRatio = MON_MALE,
-        .eggCycles = 10,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },
-        .sourceGame = SOURCE_IN,
-        .noFlip = TRUE,
-        .speciesName = _("Pikachu"),
-        .cryId = CRY_PORYGON,
-        .natDexNum = NATIONAL_DEX_CHIBI_KOAKUMA,
-        .categoryName = _("Mouse"),
-        .height = 4,
-        .weight = 60,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed as the two overcame\n"
-            "many hardships together."),
-        .pokemonScale = 479,
-        .pokemonOffset = 19,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        .frontPic = gMonFrontPic_PikachuPartnerCap,
-        .frontPicSize = MON_COORDS_SIZE(48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuPartnerCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_PikachuPartnerCap,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_PikachuPartnerCap,
-        .shinyPalette = gMonShinyPalette_PikachuPartnerCap,
-        .iconSprite = gMonIcon_PikachuPartnerCap,
-        .iconPalIndex = 0,
-        FOOTPRINT(Pikachu)
-        .levelUpLearnset = sPikachuLevelUpLearnset,
-        .teachableLearnset = sPikachuTeachableLearnset,
-        .formSpeciesIdTable = sPikachuFormSpeciesIdTable,
-    },
-
     [SPECIES_PIKACHU_WORLD_CAP] =
     {
         .baseHP        = 35,
@@ -1122,17 +797,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_PIKACHU
 
-#if P_FAMILY_CLEFAIRY
-#if P_UPDATED_TYPES >= GEN_6
-    #define CLEFAIRY_FAMILY_TYPES { TYPE_COSMIC, TYPE_COSMIC }
-#else
-    #define CLEFAIRY_FAMILY_TYPES { TYPE_ILLUSION, TYPE_ILLUSION }
-#endif
-
-#if P_GEN_2_CROSS_EVOS
-#endif //P_GEN_2_CROSS_EVOS
-#endif //P_FAMILY_CLEFAIRY
-
 #if P_FAMILY_VULPIX
 
 #if P_ALOLAN_FORMS
@@ -1201,17 +865,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     },
 #endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_VULPIX
-
-#if P_FAMILY_JIGGLYPUFF
-#if P_UPDATED_TYPES >= GEN_6
-    #define JIGGLYPUFF_FAMILY_TYPES { TYPE_ILLUSION, TYPE_COSMIC}
-#else
-    #define JIGGLYPUFF_FAMILY_TYPES { TYPE_ILLUSION, TYPE_ILLUSION}
-#endif
-
-#if P_GEN_2_CROSS_EVOS
-#endif //P_GEN_2_CROSS_EVOS
-#endif //P_FAMILY_JIGGLYPUFF
 
 #if P_FAMILY_DIGLETT
 
@@ -1947,7 +1600,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
+    #if P_UPDATED_ABILITIES >= GEN_4
         .abilities = { ABILITY_GUTS, ABILITY_NO_GUARD, ABILITY_STEADFAST },
+    #else
+        .abilities = { ABILITY_GUTS, ABILITY_NONE, ABILITY_STEADFAST },
+    #endif
         .sourceGame = SOURCE_IN,
         .speciesName = _("Machamp"),
         .cryId = CRY_PORYGON,
@@ -3936,7 +3593,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+    #if P_UPDATED_ABILITIES >= GEN_4
         .abilities = { ABILITY_SOUNDPROOF, ABILITY_FILTER, ABILITY_TECHNICIAN },
+    #else
+        .abilities = { ABILITY_SOUNDPROOF, ABILITY_NONE, ABILITY_TECHNICIAN },
+    #endif
         .sourceGame = SOURCE_MOF,
         .speciesName = _("Mime Jr."),
         .cryId = CRY_PORYGON,
@@ -5043,7 +4704,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
+    #if P_UPDATED_ABILITIES >= GEN_4
         .abilities = { ABILITY_TRACE, ABILITY_DOWNLOAD, ABILITY_ANALYTIC },
+    #else
+        .abilities = { ABILITY_TRACE, ABILITY_NONE, ABILITY_ANALYTIC },
+    #endif
         .sourceGame = SOURCE_OTHER,
         .speciesName = _("Porygon"),
         .cryId = CRY_PORYGON,
@@ -5106,10 +4771,14 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
+    #if P_UPDATED_ABILITIES >= GEN_4
         .abilities = { ABILITY_TRACE, ABILITY_DOWNLOAD, ABILITY_ANALYTIC },
-        .sourceGame = SOURCE_HRTP,
+    #else
+        .abilities = { ABILITY_TRACE, ABILITY_NONE, ABILITY_ANALYTIC },
+    #endif
+        .sourceGame = SOURCE_OTHER,
         .speciesName = _("Porygon2"),
-        .cryId = CRY_PORYGON,
+        .cryId = CRY_PORYGON2,
         .natDexNum = NATIONAL_DEX_DEFENSE_ICHIRIN,
         .categoryName = _("Virtual"),
         .height = 6,
@@ -5179,7 +4848,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .abilities = { ABILITY_ADAPTABILITY, ABILITY_DOWNLOAD, ABILITY_ANALYTIC },
         .sourceGame = SOURCE_HRTP,
         .speciesName = _("Porygon-Z"),
-        .cryId = CRY_PORYGON,
+        .cryId = CRY_PORYGON_Z,
         .natDexNum = NATIONAL_DEX_PORYGON_Z,
         .categoryName = _("Virtual"),
         .height = 9,

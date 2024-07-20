@@ -20,6 +20,11 @@ u8 MovementAction_WalkSlowLeft_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkSlowLeft_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkSlowRight_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkSlowRight_Step1(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_WalkOnStairsDown_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_WalkOnStairs_Step1(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_WalkOnStairsUp_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_WalkOnStairsLeft_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_WalkOnStairsRight_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkNormalDiagonalUpLeft_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkNormalDiagonalUpLeft_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkNormalDiagonalUpRight_Step0(struct ObjectEvent *, struct Sprite *);
@@ -114,6 +119,11 @@ u8 MovementAction_PlayerRunLeft_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_PlayerRunLeft_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_PlayerRunRight_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_PlayerRunRight_Step1(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_PlayerRunOnStairsDown_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_PlayerRunOnStairs_Step1(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_PlayerRunOnStairsUp_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_PlayerRunOnStairsLeft_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_PlayerRunOnStairsRight_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_StartAnimInDirection_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WaitSpriteAnim(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_JumpSpecialDown_Step0(struct ObjectEvent *, struct Sprite *);
@@ -255,6 +265,10 @@ u8 MovementAction_AcroEndWheelieMoveLeft_Step0(struct ObjectEvent *, struct Spri
 u8 MovementAction_AcroEndWheelieMoveLeft_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_AcroEndWheelieMoveRight_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_AcroEndWheelieMoveRight_Step1(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_SpinDown_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_SpinUp_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_SpinLeft_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_SpinRight_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_Levitate_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_StopLevitate_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_StopLevitateAtTop_Step0(struct ObjectEvent *, struct Sprite *);
@@ -275,6 +289,10 @@ u8 (*const gMovementActionFuncs_WalkSlowDown[])(struct ObjectEvent *, struct Spr
 u8 (*const gMovementActionFuncs_WalkSlowUp[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkSlowLeft[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkSlowRight[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_WalkOnStairsDown[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_WalkOnStairsUp[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_WalkOnStairsLeft[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_WalkOnStairsRight[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkNormalDown[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkNormalUp[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkNormalLeft[])(struct ObjectEvent *, struct Sprite *);
@@ -326,6 +344,10 @@ u8 (*const gMovementActionFuncs_PlayerRunDown[])(struct ObjectEvent *, struct Sp
 u8 (*const gMovementActionFuncs_PlayerRunUp[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_PlayerRunLeft[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_PlayerRunRight[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_PlayerRunOnStairsDown[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_PlayerRunOnStairsUp[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_PlayerRunOnStairsLeft[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_PlayerRunOnStairsRight[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_StartAnimInDirection[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_JumpSpecialDown[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_JumpSpecialUp[])(struct ObjectEvent *, struct Sprite *);
@@ -409,6 +431,10 @@ u8 (*const gMovementActionFuncs_AcroEndWheelieMoveDown[])(struct ObjectEvent *, 
 u8 (*const gMovementActionFuncs_AcroEndWheelieMoveUp[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_AcroEndWheelieMoveLeft[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_AcroEndWheelieMoveRight[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_SpinDown[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_SpinUp[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_SpinLeft[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_SpinRight[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkNormalDiagonalUpLeft[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkNormalDiagonalUpRight[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkNormalDiagonalDownLeft[])(struct ObjectEvent *, struct Sprite *);
@@ -439,6 +465,10 @@ u8 (*const *const gMovementActionFuncs[])(struct ObjectEvent *, struct Sprite *)
     [MOVEMENT_ACTION_WALK_SLOW_UP] = gMovementActionFuncs_WalkSlowUp,
     [MOVEMENT_ACTION_WALK_SLOW_LEFT] = gMovementActionFuncs_WalkSlowLeft,
     [MOVEMENT_ACTION_WALK_SLOW_RIGHT] = gMovementActionFuncs_WalkSlowRight,
+    [MOVEMENT_ACTION_WALK_ON_STAIRS_DOWN] = gMovementActionFuncs_WalkOnStairsDown,
+    [MOVEMENT_ACTION_WALK_ON_STAIRS_UP] = gMovementActionFuncs_WalkOnStairsUp,
+    [MOVEMENT_ACTION_WALK_ON_STAIRS_LEFT] = gMovementActionFuncs_WalkOnStairsLeft,
+    [MOVEMENT_ACTION_WALK_ON_STAIRS_RIGHT] = gMovementActionFuncs_WalkOnStairsRight,
     [MOVEMENT_ACTION_WALK_NORMAL_DOWN] = gMovementActionFuncs_WalkNormalDown,
     [MOVEMENT_ACTION_WALK_NORMAL_UP] = gMovementActionFuncs_WalkNormalUp,
     [MOVEMENT_ACTION_WALK_NORMAL_LEFT] = gMovementActionFuncs_WalkNormalLeft,
@@ -488,6 +518,10 @@ u8 (*const *const gMovementActionFuncs[])(struct ObjectEvent *, struct Sprite *)
     [MOVEMENT_ACTION_PLAYER_RUN_UP] = gMovementActionFuncs_PlayerRunUp,
     [MOVEMENT_ACTION_PLAYER_RUN_LEFT] = gMovementActionFuncs_PlayerRunLeft,
     [MOVEMENT_ACTION_PLAYER_RUN_RIGHT] = gMovementActionFuncs_PlayerRunRight,
+    [MOVEMENT_ACTION_PLAYER_RUN_ON_STAIRS_DOWN] = gMovementActionFuncs_PlayerRunOnStairsDown,
+    [MOVEMENT_ACTION_PLAYER_RUN_ON_STAIRS_UP] = gMovementActionFuncs_PlayerRunOnStairsUp,
+    [MOVEMENT_ACTION_PLAYER_RUN_ON_STAIRS_LEFT] = gMovementActionFuncs_PlayerRunOnStairsLeft,
+    [MOVEMENT_ACTION_PLAYER_RUN_ON_STAIRS_RIGHT] = gMovementActionFuncs_PlayerRunOnStairsRight,
     [MOVEMENT_ACTION_START_ANIM_IN_DIRECTION] = gMovementActionFuncs_StartAnimInDirection,
     [MOVEMENT_ACTION_JUMP_SPECIAL_DOWN] = gMovementActionFuncs_JumpSpecialDown,
     [MOVEMENT_ACTION_JUMP_SPECIAL_UP] = gMovementActionFuncs_JumpSpecialUp,
@@ -571,6 +605,10 @@ u8 (*const *const gMovementActionFuncs[])(struct ObjectEvent *, struct Sprite *)
     [MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_UP] = gMovementActionFuncs_AcroEndWheelieMoveUp,
     [MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_LEFT] = gMovementActionFuncs_AcroEndWheelieMoveLeft,
     [MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_RIGHT] = gMovementActionFuncs_AcroEndWheelieMoveRight,
+    [MOVEMENT_ACTION_SPIN_DOWN] = gMovementActionFuncs_SpinDown,
+    [MOVEMENT_ACTION_SPIN_UP] gMovementActionFuncs_SpinUp,
+    [MOVEMENT_ACTION_SPIN_LEFT] gMovementActionFuncs_SpinLeft,
+    [MOVEMENT_ACTION_SPIN_RIGHT] gMovementActionFuncs_SpinRight,
     [MOVEMENT_ACTION_WALK_NORMAL_DIAGONAL_UP_LEFT] = gMovementActionFuncs_WalkNormalDiagonalUpLeft,
     [MOVEMENT_ACTION_WALK_NORMAL_DIAGONAL_UP_RIGHT] = gMovementActionFuncs_WalkNormalDiagonalUpRight,
     [MOVEMENT_ACTION_WALK_NORMAL_DIAGONAL_DOWN_LEFT] = gMovementActionFuncs_WalkNormalDiagonalDownLeft,
@@ -668,6 +706,30 @@ u8 (*const gMovementActionFuncs_WalkSlowLeft[])(struct ObjectEvent *, struct Spr
 u8 (*const gMovementActionFuncs_WalkSlowRight[])(struct ObjectEvent *, struct Sprite *) = {
     MovementAction_WalkSlowRight_Step0,
     MovementAction_WalkSlowRight_Step1,
+    MovementAction_PauseSpriteAnim,
+};
+
+u8 (*const gMovementActionFuncs_WalkOnStairsDown[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_WalkOnStairsDown_Step0,
+    MovementAction_WalkOnStairs_Step1,
+    MovementAction_PauseSpriteAnim,
+};
+
+u8 (*const gMovementActionFuncs_WalkOnStairsUp[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_WalkOnStairsUp_Step0,
+    MovementAction_WalkOnStairs_Step1,
+    MovementAction_PauseSpriteAnim,
+};
+
+u8 (*const gMovementActionFuncs_WalkOnStairsLeft[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_WalkOnStairsLeft_Step0,
+    MovementAction_WalkOnStairs_Step1,
+    MovementAction_PauseSpriteAnim,
+};
+
+u8 (*const gMovementActionFuncs_WalkOnStairsRight[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_WalkOnStairsRight_Step0,
+    MovementAction_WalkOnStairs_Step1,
     MovementAction_PauseSpriteAnim,
 };
 
@@ -1009,6 +1071,30 @@ u8 (*const gMovementActionFuncs_PlayerRunLeft[])(struct ObjectEvent *, struct Sp
 u8 (*const gMovementActionFuncs_PlayerRunRight[])(struct ObjectEvent *, struct Sprite *) = {
     MovementAction_PlayerRunRight_Step0,
     MovementAction_PlayerRunRight_Step1,
+    MovementAction_PauseSpriteAnim,
+};
+
+u8 (*const gMovementActionFuncs_PlayerRunOnStairsDown[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_PlayerRunOnStairsDown_Step0,
+    MovementAction_PlayerRunOnStairs_Step1,
+    MovementAction_PauseSpriteAnim,
+};
+
+u8 (*const gMovementActionFuncs_PlayerRunOnStairsUp[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_PlayerRunOnStairsUp_Step0,
+    MovementAction_PlayerRunOnStairs_Step1,
+    MovementAction_PauseSpriteAnim,
+};
+
+u8 (*const gMovementActionFuncs_PlayerRunOnStairsLeft[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_PlayerRunOnStairsLeft_Step0,
+    MovementAction_PlayerRunOnStairs_Step1,
+    MovementAction_PauseSpriteAnim,
+};
+
+u8 (*const gMovementActionFuncs_PlayerRunOnStairsRight[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_PlayerRunOnStairsRight_Step0,
+    MovementAction_PlayerRunOnStairs_Step1,
     MovementAction_PauseSpriteAnim,
 };
 
@@ -1527,6 +1613,30 @@ u8 (*const gMovementActionFuncs_AcroEndWheelieMoveLeft[])(struct ObjectEvent *, 
 u8 (*const gMovementActionFuncs_AcroEndWheelieMoveRight[])(struct ObjectEvent *, struct Sprite *) = {
     MovementAction_AcroEndWheelieMoveRight_Step0,
     MovementAction_AcroEndWheelieMoveRight_Step1,
+    MovementAction_PauseSpriteAnim,
+};
+
+u8 (*const gMovementActionFuncs_SpinDown[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_SpinDown_Step0,
+    MovementAction_WalkNormalDiagonalUpLeft_Step1,
+    MovementAction_PauseSpriteAnim,
+};
+
+u8 (*const gMovementActionFuncs_SpinUp[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_SpinUp_Step0,
+    MovementAction_WalkNormalDiagonalUpLeft_Step1,
+    MovementAction_PauseSpriteAnim,
+};
+
+u8 (*const gMovementActionFuncs_SpinLeft[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_SpinLeft_Step0,
+    MovementAction_WalkNormalDiagonalUpLeft_Step1,
+    MovementAction_PauseSpriteAnim,
+};
+
+u8 (*const gMovementActionFuncs_SpinRight[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_SpinRight_Step0,
+    MovementAction_WalkNormalDiagonalUpLeft_Step1,
     MovementAction_PauseSpriteAnim,
 };
 

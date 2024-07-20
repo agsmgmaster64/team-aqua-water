@@ -210,6 +210,7 @@ EWRAM_DATA static u16 sLastMapSectionId = 0;
 EWRAM_DATA static struct InitialPlayerAvatarState sInitialPlayerAvatarState = {0};
 EWRAM_DATA static u16 sAmbientCrySpecies = 0;
 EWRAM_DATA static bool8 sIsAmbientCryWaterMon = FALSE;
+ALIGNED(4) EWRAM_DATA bool8 gExitStairsMovementDisabled = FALSE;
 EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {0};
 
 static const struct WarpData sDummyWarpData =
@@ -769,9 +770,19 @@ void SetWarpDestinationToHealLocation(u8 healLocationId)
         SetWarpDestination(healLocation->group, healLocation->map, WARP_ID_NONE, healLocation->x, healLocation->y);
 }
 
+static bool32 IsFRLGWhiteout(void)
+{
+    if (!OW_FRLG_WHITEOUT)
+        return FALSE;
+    return HasHealNPC(GetHealLocationIndexByMap(gSaveBlock1Ptr->lastHealLocation.mapGroup, gSaveBlock1Ptr->lastHealLocation.mapNum));
+}
+
 void SetWarpDestinationToLastHealLocation(void)
 {
-    sWarpDestination = gSaveBlock1Ptr->lastHealLocation;
+    if (IsFRLGWhiteout())
+        SetWhiteoutRespawnWarpAndHealerNPC(&sWarpDestination);
+    else
+        sWarpDestination = gSaveBlock1Ptr->lastHealLocation;
 }
 
 void SetLastHealLocationWarp(u8 healLocationId)
@@ -989,6 +1000,7 @@ if (I_VS_SEEKER_CHARGING != 0)
     RunOnTransitionMapScript();
     UpdateLocationHistoryForRoamer();
     MoveAllRoamersToOtherLocationSets();
+    gChainFishingDexNavStreak = 0;
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         InitBattlePyramidMap(FALSE);
     else if (InTrainerHill())
@@ -1290,22 +1302,7 @@ void Overworld_PlaySpecialMapMusic(void)
         }
         else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && Overworld_MusicCanOverrideMapMusic())
         {
-            switch (gSaveBlock2Ptr->optionsMusicStyle)
-            {
-            case OPTIONS_MUSIC_STYLE_DEFAULT:
-                music = MUS_WLD_SURF;
-                break;
-            case OPTIONS_MUSIC_STYLE_ZGS:
-                music = MUS_ZGS_SURF;
-                break;
-            case OPTIONS_MUSIC_STYLE_ALTERNATE:
-                music = MUS_WLD_SURF;
-                break;
-            case OPTIONS_MUSIC_STYLE_VANILLA:
-            default:
-                music = MUS_SURF;
-                break;
-            }
+            music = MUS_WLD_SURF;
         }
     }
 
@@ -1342,22 +1339,7 @@ static void TransitionMapMusic(void)
                 return;
             if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && Overworld_MusicCanOverrideMapMusic())
             {
-                switch (gSaveBlock2Ptr->optionsMusicStyle)
-                {
-                case OPTIONS_MUSIC_STYLE_DEFAULT:
-                    newMusic = MUS_WLD_SURF;
-                    break;
-                case OPTIONS_MUSIC_STYLE_ZGS:
-                    newMusic = MUS_ZGS_SURF;
-                    break;
-                case OPTIONS_MUSIC_STYLE_ALTERNATE:
-                    newMusic = MUS_WLD_SURF;
-                    break;
-                case OPTIONS_MUSIC_STYLE_VANILLA:
-                default:
-                    newMusic = MUS_SURF;
-                    break;
-                }
+                newMusic = MUS_WLD_SURF;
             }
         }
         if (newMusic != currentMusic)
@@ -1730,7 +1712,10 @@ void CB2_WhiteOut(void)
         ResetInitialPlayerAvatarState();
         ScriptContext_Init();
         UnlockPlayerFieldControls();
-        gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+        if (IsFRLGWhiteout())
+            gFieldCallback = FieldCB_RushInjuredPokemonToCenter;
+        else
+            gFieldCallback = FieldCB_WarpExitFadeFromBlack;
         state = 0;
         DoMapLoadLoop(&state);
         SetFieldVBlankCallback();
@@ -1906,6 +1891,7 @@ void CB2_ContinueSavedGame(void)
     ScriptContext_Init();
     UnlockPlayerFieldControls();
     InitMatchCallCounters();
+    gExitStairsMovementDisabled = TRUE;
     if (UseContinueGameWarp() == TRUE)
     {
         ClearContinueGameWarpStatus();

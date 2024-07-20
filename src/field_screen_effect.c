@@ -7,11 +7,13 @@
 #include "field_effect.h"
 #include "event_object_lock.h"
 #include "event_object_movement.h"
+#include "event_scripts.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_special_scene.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
+#include "heal_location.h"
 #include "io_reg.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -26,10 +28,13 @@
 #include "script.h"
 #include "sound.h"
 #include "start_menu.h"
+#include "strings.h"
+#include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
+#include "constants/heal_locations.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "trainer_hill.h"
@@ -40,6 +45,8 @@
 #include "battle_pyramid_bag.h"
 #include "safari_zone.h"
 #include "field_specials.h"
+#include "constants/metatile_behaviors.h"
+#include "m4a.h"
 
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
@@ -51,6 +58,13 @@ static void Task_SpinEnterWarp(u8 taskId);
 static void Task_WarpAndLoadMap(u8 taskId);
 static void Task_DoDoorWarp(u8 taskId);
 static void Task_EnableScriptAfterMusicFade(u8 taskId);
+static void Task_DoStairWarp(u8 taskId);
+static void ForceStairsMovement(u16 behavior, s16 *x, s16 *y);
+static void GetStairsMovementDirection(u8 behavior, s16 *x, s16 *y);
+static void UpdateStairsMovement(s16 speedX, s16 speedY, s16 *offsetX, s16 *offsetY, s16 *timer);
+static void Task_ExitStairs(u8 taskId);
+static void ExitStairsMovement(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offsetY, s16 *timer);
+static bool8 WaitStairExitMovementFinished(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offsetY, s16 *timer);
 
 // data[0] is used universally by tasks in this file as a state for switches
 #define tState       data[0]
@@ -271,8 +285,11 @@ static void SetUpWarpExitTask(void)
         func = Task_ExitDoor;
     else if (MetatileBehavior_IsNonAnimDoor(behavior) == TRUE)
         func = Task_ExitNonAnimDoor;
+    else if (behavior >= MB_UP_RIGHT_STAIR_WARP && behavior <= MB_DOWN_LEFT_STAIR_WARP && gExitStairsMovementDisabled == FALSE)
+        func = Task_ExitStairs;
     else
         func = Task_ExitNonDoor;
+    gExitStairsMovementDisabled = FALSE;
     CreateTask(func, 10);
 }
 
@@ -511,6 +528,14 @@ void DoDiveWarp(void)
     CreateTask(Task_WarpAndLoadMap, 10);
 }
 
+void DoStairWarp(u16 metatileBehavior, u16 delay)
+{
+    u8 taskId = CreateTask(Task_DoStairWarp, 10);
+    gTasks[taskId].data[1] = metatileBehavior;
+    gTasks[taskId].data[15] = delay;
+    Task_DoStairWarp(taskId);
+}
+
 void DoWhiteFadeWarp(void)
 {
     LockPlayerFieldControls();
@@ -740,6 +765,178 @@ static void Task_DoDoorWarp(u8 taskId)
         task->tState = 0;
         task->func = Task_WarpAndLoadMap;
         break;
+    }
+}
+
+static void Task_DoStairWarp(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct Sprite *playerSpr = &gSprites[gPlayerAvatar.spriteId];
+    switch (tState)
+    {
+    case 0:
+        LockPlayerFieldControls();
+        FreezeObjectEvents();
+        CameraObjectFreeze();
+        tState++;
+        break;
+    case 1:
+        if (!ObjectEventIsMovementOverridden(playerObj) || ObjectEventClearHeldMovementIfFinished(playerObj))
+        {
+            if (data[15] != 0)
+                data[15]--;
+            else
+            {
+                TryFadeOutOldMapMusic();
+                PlayRainStoppingSoundEffect();
+                playerSpr->oam.priority = 1;
+                ForceStairsMovement(data[1], &data[2], &data[3]);
+                m4aSongNumStart(SE_EXIT);
+                tState++;
+            }
+        }
+        break;
+    case 2:
+        UpdateStairsMovement(data[2], data[3], &data[4], &data[5], &data[6]);
+        if (data[15]++ >= 12)
+        {
+            WarpFadeOutScreen();
+            tState++;
+        }
+        break;
+    case 3:
+        UpdateStairsMovement(data[2], data[3], &data[4], &data[5], &data[6]);
+        if (!PaletteFadeActive() && BGMusicStopped())
+            tState++;
+        break;
+    default:
+        gFieldCallback = FieldCB_DefaultWarpExit;
+        WarpIntoMap();
+        SetMainCallback2(CB2_LoadMap);
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+static void UpdateStairsMovement(s16 speedX, s16 speedY, s16 *offsetX, s16 *offsetY, s16 *timer)
+{
+    struct Sprite *playerSpr = &gSprites[gPlayerAvatar.spriteId];
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (speedY > 0 || *timer > 6)
+        *offsetY += speedY;
+    *offsetX += speedX;
+    (*timer)++;
+    playerSpr->x2 = *offsetX >> 5;
+    playerSpr->y2 = *offsetY >> 5;
+    if (playerObj->heldMovementFinished)
+        ObjectEventForceSetHeldMovement(playerObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
+}
+
+static void ForceStairsMovement(u16 metatileBehavior, s16 *x, s16 *y)
+{
+    ObjectEventForceSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
+    GetStairsMovementDirection(metatileBehavior, x, y);
+}
+
+static void GetStairsMovementDirection(u8 metatileBehavior, s16 *x, s16 *y)
+{
+    if (metatileBehavior == MB_UP_RIGHT_STAIR_WARP)
+    {
+        *x = 16;
+        *y = -10;
+    }
+    else if (metatileBehavior == MB_UP_LEFT_STAIR_WARP)
+    {
+        *x = -17;
+        *y = -10;
+    }
+    else if (metatileBehavior == MB_DOWN_RIGHT_STAIR_WARP)
+    {
+        *x = 17;
+        *y = 3;
+    }
+    else if (metatileBehavior == MB_DOWN_LEFT_STAIR_WARP)
+    {
+        *x = -17;
+        *y = 3;
+    }
+    else
+    {
+        *x = 0;
+        *y = 0;
+    }
+}
+
+static void Task_ExitStairs(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    switch (tState)
+    {
+    default:
+        if (WaitForWeatherFadeIn())
+        {
+            CameraObjectReset();
+            UnlockPlayerFieldControls();
+            DestroyTask(taskId);
+        }
+        break;
+    case 0:
+        Overworld_PlaySpecialMapMusic();
+        WarpFadeInScreen();
+        LockPlayerFieldControls();
+        ExitStairsMovement(&data[1], &data[2], &data[3], &data[4], &data[5]);
+        tState++;
+        break;
+    case 1:
+        if (!WaitStairExitMovementFinished(&data[1], &data[2], &data[3], &data[4], &data[5]))
+            tState++;
+        break;
+    }
+}
+
+static void ExitStairsMovement(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offsetY, s16 *timer)
+{
+    s16 x, y;
+    u8 metatileBehavior;
+    s32 direction;
+    struct Sprite *sprite;
+    PlayerGetDestCoords(&x, &y);
+    metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+    if (metatileBehavior == MB_DOWN_RIGHT_STAIR_WARP || metatileBehavior == MB_UP_RIGHT_STAIR_WARP)
+        direction = DIR_WEST;
+    else
+        direction = DIR_EAST;
+    ObjectEventForceSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetWalkInPlaceSlowMovementAction(direction));
+    GetStairsMovementDirection(metatileBehavior, speedX, speedY);
+    *offsetX = *speedX * 16;
+    *offsetY = *speedY * 16;
+    *timer = 16;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->x2 = *offsetX >> 5;
+    sprite->y2 = *offsetY >> 5;
+    *speedX = -*speedX;
+    *speedY = -*speedY;
+}
+
+static bool8 WaitStairExitMovementFinished(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offsetY, s16 *timer)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    if (*timer != 0)
+    {
+        *offsetX += *speedX;
+        *offsetY += *speedY;
+        sprite->x2 = *offsetX >> 5;
+        sprite->y2 = *offsetY >> 5;
+        (*timer)--;
+        return TRUE;
+    }
+    else
+    {
+        sprite->x2 = 0;
+        sprite->y2 = 0;
+        return FALSE;
     }
 }
 
@@ -1282,4 +1479,120 @@ static void Task_EnableScriptAfterMusicFade(u8 taskId)
         DestroyTask(taskId);
         ScriptContext_Enable();
     }
+}
+
+static const struct WindowTemplate sWindowTemplate_WhiteoutText =
+{
+    .bg = 0,
+    .tilemapLeft = 0,
+    .tilemapTop = 5,
+    .width = 30,
+    .height = 11,
+    .paletteNum = 15,
+    .baseBlock = 1,
+};
+
+static const u8 sWhiteoutTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
+
+#define tState      data[0]
+#define tWindowId   data[1]
+#define tPrintState data[2]
+
+static bool8 PrintWhiteOutRecoveryMessage(u8 taskId, const u8 *text, u8 x, u8 y)
+{
+    u8 windowId = gTasks[taskId].tWindowId;
+
+    switch (gTasks[taskId].tPrintState)
+    {
+    case 0:
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+        StringExpandPlaceholders(gStringVar4, text);
+        AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, 1, 0, sWhiteoutTextColors, 1, gStringVar4);
+        gTextFlags.canABSpeedUpPrint = FALSE;
+        gTasks[taskId].tPrintState = 1;
+        break;
+    case 1:
+        RunTextPrinters();
+        if (!IsTextPrinterActive(windowId))
+        {
+            gTasks[taskId].tPrintState = 0;
+            return TRUE;
+        }
+        break;
+    }
+    return FALSE;
+}
+
+static void Task_RushInjuredPokemonToCenter(u8 taskId)
+{
+    u8 windowId;
+
+    switch (gTasks[taskId].tState)
+    {
+    case 0:
+        windowId = AddWindow(&sWindowTemplate_WhiteoutText);
+        gTasks[taskId].tWindowId = windowId;
+        Menu_LoadStdPalAt(BG_PLTT_ID(15));
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+        PutWindowTilemap(windowId);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
+
+        // Scene changes if last heal location was the player's house
+        if (IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE)
+            || IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F)
+            || IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE)
+            || IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F))
+            gTasks[taskId].tState = 4;
+        else
+            gTasks[taskId].tState = 1;
+        break;
+    case 1:
+        if (PrintWhiteOutRecoveryMessage(taskId, gText_PlayerScurriedToCenter, 2, 8))
+        {
+            ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], DIR_NORTH);
+            gTasks[taskId].tState++;
+        }
+        break;
+    case 4:
+        if (PrintWhiteOutRecoveryMessage(taskId, gText_PlayerScurriedBackHome, 2, 8))
+        {
+            ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], DIR_NORTH);
+            gTasks[taskId].tState++;
+        }
+        break;
+    case 2:
+    case 5:
+        windowId = gTasks[taskId].tWindowId;
+        ClearWindowTilemap(windowId);
+        CopyWindowToVram(windowId, COPYWIN_MAP);
+        RemoveWindow(windowId);
+        FillPalBufferBlack();
+        FadeInFromBlack();
+        gTasks[taskId].tState++;
+        break;
+    case 3:
+        if (WaitForWeatherFadeIn() == TRUE)
+        {
+            DestroyTask(taskId);
+            ScriptContext_SetupScript(EventScript_AfterWhiteOutHeal);
+        }
+        break;
+    case 6:
+        if (WaitForWeatherFadeIn() == TRUE)
+        {
+            DestroyTask(taskId);
+            ScriptContext_SetupScript(EventScript_AfterWhiteOutMomHeal);
+        }
+        break;
+    }
+}
+
+void FieldCB_RushInjuredPokemonToCenter(void)
+{
+    u8 taskId;
+
+    LockPlayerFieldControls();
+    FillPalBufferBlack();
+    taskId = CreateTask(Task_RushInjuredPokemonToCenter, 10);
+    gTasks[taskId].tState = 0;
 }

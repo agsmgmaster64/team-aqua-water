@@ -218,10 +218,10 @@ struct SpecialStatus
     u8 statLowered:1;
     u8 lightningRodRedirected:1;
     u8 restoredBattlerSprite: 1;
-    u8 traced:1;
     u8 faintedHasReplacement:1;
     u8 focusBanded:1;
     u8 focusSashed:1;
+    u8 unused:1;
     // End of byte
     u8 sturdied:1;
     u8 stormDrainRedirected:1;
@@ -620,6 +620,7 @@ struct BattleStruct
     u32 expValue;
     u8 expGettersOrder[PARTY_SIZE]; // First battlers which were sent out, then via exp-share
     u8 expGetterMonId;
+    u8 hasBattleInputStarted:1; // Speed up battle
     u8 expOrderId:3;
     u8 expGetterBattlerId:2;
     u8 teamGotExpMsgPrinted:1; // The 'Rest of your team got msg' has been printed.
@@ -634,7 +635,7 @@ struct BattleStruct
     u8 moneyMultiplierItem:1;
     u8 moneyMultiplierMove:1;
     u8 savedTurnActionNumber;
-    u8 switchInAbilitiesCounter;
+    u8 eventsBeforeFirstTurnState;
     u8 faintedActionsState;
     u8 faintedActionsBattlerId;
     u8 scriptPartyIdx; // for printing the nickname
@@ -678,7 +679,7 @@ struct BattleStruct
     u16 chosenItem[MAX_BATTLERS_COUNT];
     u16 choicedMove[MAX_BATTLERS_COUNT];
     u16 changedItems[MAX_BATTLERS_COUNT];
-    u8 switchInItemsCounter;
+    u8 switchInBattlerCounter;
     u8 arenaTurnCounter;
     u8 turnSideTracker;
     u16 lastTakenMoveFrom[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT]; // a 2-D array [target][attacker]

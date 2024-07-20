@@ -593,7 +593,7 @@ static void DoBattlePyramidTrainerHillBattle(void)
 // Initiates battle where Wally catches Ralts
 void StartWallyTutorialBattle(void)
 {
-    CreateMaleMon(&gEnemyParty[0], SPECIES_NORMAL_SEKIBANKI, 5);
+    CreateMaleMon(&gEnemyParty[0], SPECIES_CHIBI_ELLEN, 5);
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
     gBattleTypeFlags = BATTLE_TYPE_WALLY_TUTORIAL;
@@ -2068,15 +2068,16 @@ static bool32 HasAtLeastFiveBadges(void)
 void IncrementRematchStepCounter(void)
 {
 #if FREE_MATCH_CALL == FALSE
-    if (HasAtLeastFiveBadges()
-        && (I_VS_SEEKER_CHARGING != 0)
-        && (!CheckBagHasItem(ITEM_VS_SEEKER, 1)))
-    {
-        if (gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
-            gSaveBlock1Ptr->trainerRematchStepCounter = STEP_COUNTER_MAX;
-        else
-            gSaveBlock1Ptr->trainerRematchStepCounter++;
-    }
+    if (!HasAtLeastFiveBadges())
+        return;
+    
+    if (IsVsSeekerEnabled())
+        return;
+
+    if (gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
+        gSaveBlock1Ptr->trainerRematchStepCounter = STEP_COUNTER_MAX;
+    else
+        gSaveBlock1Ptr->trainerRematchStepCounter++;
 #endif //FREE_MATCH_CALL
 }
 

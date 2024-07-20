@@ -507,7 +507,7 @@
 // or loop.
 #define BATTLE_TEST_STACK_SIZE 1024
 #define MAX_TURNS 16
-#define MAX_QUEUED_EVENTS 25
+#define MAX_QUEUED_EVENTS 30
 #define MAX_EXPECTED_ACTIONS 10
 
 enum { BATTLE_TEST_SINGLES, BATTLE_TEST_DOUBLES, BATTLE_TEST_WILD, BATTLE_TEST_AI_SINGLES, BATTLE_TEST_AI_DOUBLES };
@@ -995,6 +995,8 @@ void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 // Static const is needed to make the modern compiler put the pattern variable in the .rodata section, instead of putting it on stack(which can break the game).
 #define MESSAGE(pattern) do {static const u8 msg[] = _(pattern); QueueMessage(__LINE__, msg);} while (0)
 #define STATUS_ICON(battler, status) QueueStatus(__LINE__, battler, (struct StatusEventContext) { status })
+#define FREEZE_OR_FROSTBURN_STATUS(battler, isFrostbite) \
+    (B_USE_FROSTBITE ? STATUS_ICON(battler, frostbite: isFrostbite) : STATUS_ICON(battler, freeze: isFrostbite))
 
 #define SWITCH_OUT_MESSAGE(name) ONE_OF {                                         \
                                      MESSAGE(name ", that's enough! Come back!"); \
