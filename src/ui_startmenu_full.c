@@ -963,6 +963,7 @@ static void StartMenuFull_VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
+    ChangeBgX(2, 128, BG_COORD_SUB); // controls the background scrolling
     ChangeBgY(2, 128, BG_COORD_SUB); // controls the background scrolling
 }
 

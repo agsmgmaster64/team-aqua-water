@@ -13,9 +13,9 @@ Basinville_EventScript_IntroCoffeeVsTea::
 # 28 "data/maps/Basinville/scripts.pory"
 	lockall
 # 29 "data/maps/Basinville/scripts.pory"
-	msgbox Basinville_Text_HeyPlayer
-# 30 "data/maps/Basinville/scripts.pory"
 	setspeakername Basinville_Text_CeciliaName
+# 30 "data/maps/Basinville/scripts.pory"
+	msgbox Basinville_Text_HeyPlayer
 # 31 "data/maps/Basinville/scripts.pory"
 	setvar VAR_BASINVILLE_STATE, 1
 # 32 "data/maps/Basinville/scripts.pory"
