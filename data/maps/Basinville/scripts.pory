@@ -18,6 +18,11 @@ const MULTI_TALK_BAELZ = 0
 const MULTI_TALK_COFFEE_2 = 2
 const MULTI_TALK_TEA_2 = 3
 
+const MULTI_GIVE_COFFEE = 0
+const MULTI_GIVE_TEA = 1
+const MULTI_GIVE_WATER = 2
+const MULTI_GIVE_NOTHING = 3
+
 mapscripts Basinville_MapScripts {
 	MAP_SCRIPT_ON_FRAME_TABLE [
 		VAR_BASINVILLE_STATE, 0: Basinville_EventScript_IntroCoffeeVsTea
@@ -30,15 +35,6 @@ script Basinville_EventScript_IntroCoffeeVsTea {
 	msgbox(Basinville_Text_HeyPlayer)
 	setvar(VAR_BASINVILLE_STATE, 1)
 	releaseall
-	end
-}
-
-script Basinville_EventScript_HakosBaelz {
-	lock
-	faceplayer
-	setspeakername(Basinville_Text_BaelzName)
-	msgbox("Among Us")
-	release
 	end
 }
 
@@ -122,6 +118,24 @@ script Basinville_EventScript_StupidRat {
 	end
 }
 
+script Basinville_EventScript_FarmLady {
+	lock
+	faceplayer
+	checkitem(ITEM_WAILMER_PAIL)
+	if (var(VAR_RESULT) == 0) {
+		goto(Basinville_EventScript_FarmLadyGivePail)
+	}
+	release
+	end
+}
+
+script Basinville_EventScript_FarmLadyGivePail {
+	msgbox(Basinville_Text_FarmLadyGivePail)
+	giveitem(ITEM_WAILMER_PAIL)
+	release
+	end
+}
+
 script Basinville_EventScript_PrepareUTShopMultichoice {
     dynmultipush(Basinville_Text_Buy, MULTI_BUY)
     dynmultipush(Basinville_Text_Sell, MULTI_SELL)
@@ -138,6 +152,15 @@ script Basinville_EventScript_PrepareBobOmbTalkMultichoice {
     dynmultipush(Basinville_Text_Coffee, MULTI_TALK_COFFEE_1)
     dynmultipush(Basinville_Text_Exit, MULTI_TALK_EXIT)
     dynmultistack(0, 0, FALSE, 5, FALSE, MULTI_TALK_CECILIA, NULL)
+    return
+}
+
+script Basinville_EventScript_PrepareDrinkGiveMultichoice {
+    dynmultipush(Basinville_Text_Coffee, MULTI_GIVE_COFFEE)
+    dynmultipush(Basinville_Text_Tea, MULTI_GIVE_TEA)
+    dynmultipush(Basinville_Text_Water, MULTI_GIVE_WATER)
+    dynmultipush(Basinville_Text_Nothing, MULTI_GIVE_WATER)
+    dynmultistack(0, 0, FALSE, 4, FALSE, MULTI_GIVE_COFFEE, NULL)
     return
 }
 
@@ -169,6 +192,10 @@ text Basinville_Text_Coffee {
 	"Coffee"
 }
 
+text Basinville_Text_Water {
+	"Water"
+}
+
 text Basinville_Text_DoingHere {
 	"Doing Here"
 }
@@ -187,6 +214,10 @@ text Basinville_Text_BaelzName {
 
 text Basinville_Text_CeciliaName {
 	"Cecilia"
+}
+
+text Basinville_Text_Nothing {
+	"Nothing"
 }
 
 text Basinville_Text_BobOmbShopIntro {
@@ -208,7 +239,8 @@ text Basinville_Text_BobOmbShopTalk {
 
 text Basinville_Text_BobOmbShopTalk_Cecilia {
 	format("Cecilia...\pShe certainly is an interesting person to be around, that I will say.\p"
-	"She is certainly charming in her own way, although don't be fooled by her appearance and think she's just a regular lady.\p")
+	"She is certainly charming in her own way, although don't be fooled by her appearance and think she's just a regular lady.\p"
+	"To start I guess, she ")
 }
 
 text Basinville_Text_BobOmbShopTalk_DoingHere {
@@ -242,6 +274,17 @@ text Basinville_Text_BobOmbShopKeep {
 }
 
 text Basinville_Text_BobOmbShopExit {
+	format("Hope to see you again, fellow Otomo.")
+}
+
+text Basinville_Text_FarmLadyGivePail {
+	format("Why hello there.\p"
+	"I'm the farmer lady of this little village here.\p"
+	"Here, we harvest berries for us to eat, as well as to give to our savior of the village here.\p"
+	"If you're willing to help out, I have a spare pail if you want to harvest berries of your own.")
+}
+
+text Basinville_Text_FarmLadyHasPail {
 	format("Hope to see you again, fellow Otomo.")
 }
 

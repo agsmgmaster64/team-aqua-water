@@ -72,6 +72,7 @@ script Basinville_StartingHouse_Shiori_StartingOut {
     }
     setflag(FLAG_SYS_POKEMON_GET)
     setflag(FLAG_SYS_POKEDEX_GET)
+    setflag(FLAG_SCRIPTED_LOSS)
     setspeakername(Basinville_StartingHouse_Text_ShioriName)
     msgbox(Basinville_StartingHouse_Text_ShioriSpeechStart2)
     hidespeakername
@@ -162,6 +163,10 @@ text Basinville_StartingHouse_Text_Tangent {
 
 text Basinville_StartingHouse_Text_Nothing {
     "Nothing"
+}
+
+text Basinville_StartingHouse_Text_Nevermind {
+    "Nevermind"
 }
 
 text Basinville_StartingHouse_Text_ShioriSeeYou {
